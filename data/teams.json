@@ -1,0 +1,19 @@
+{
+  "_note": "PLACEHOLDER. Replace with the real team list when Jim has it (ROADMAP P1.2). Per Donny: each team lists the club, the sponsor, and the players. Never invent clubs, sponsors, or names. Set captain:true on the Team Captain Host if that is tracked per team.",
+  "teams": [
+    {
+      "id": "sample-1",
+      "club": "Sample Club",
+      "sponsor": "Sponsor name to come",
+      "players": ["Player one", "Player two", "Player three", "Player four"],
+      "placeholder": true
+    },
+    {
+      "id": "sample-2",
+      "club": "Sample Club",
+      "sponsor": "Sponsor name to come",
+      "players": ["Player one", "Player two"],
+      "placeholder": true
+    }
+  ]
+}

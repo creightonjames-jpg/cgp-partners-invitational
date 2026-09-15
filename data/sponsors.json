@@ -1,0 +1,14 @@
+{
+  "_note": "PLACEHOLDER. Needs sponsor names, tiers, and logos from Donny (ROADMAP P1.7). Logos go in assets/sponsors/ as PNG with a white or transparent background. Tiers render in the order listed here, so put the top tier first.",
+  "intro": "Our thanks to the partners who make this week possible.",
+  "tiers": [
+    {
+      "id": "tier-1",
+      "name": "Tier name to come",
+      "placeholder": true,
+      "sponsors": [
+        { "name": "Sponsor name to come", "logo": null, "url": null, "placeholder": true }
+      ]
+    }
+  ]
+}

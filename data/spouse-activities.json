@@ -1,0 +1,14 @@
+{
+  "_note": "PLACEHOLDER. Needs the daytime spouse program from Amy (ROADMAP P1.8): spa, pool, tennis, El Paseo, the tram, organized excursions, with times and whether anything needs a reservation. The starred events already on the Agenda are the evening side of this and do not need repeating here.",
+  "intro": "What to do while the players are on the course.",
+  "sections": [
+    {
+      "id": "sample",
+      "title": "Activities to come",
+      "placeholder": true,
+      "items": [
+        { "label": "Program to come", "detail": "Amy is putting the daytime schedule together. It will land here.", "placeholder": true }
+      ]
+    }
+  ]
+}

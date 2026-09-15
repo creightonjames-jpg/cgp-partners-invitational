@@ -415,7 +415,113 @@ a { color: var(--pool-deep); }
 }
 .like-btn.liked { color: var(--terra); font-weight: 600; }
 
-/* ------------------------------------------------------------- concierge */
+/* ------------------------------------------------------------------ teams */
+.team-card { display: flex; flex-direction: column; gap: 6px; }
+.team-club {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 15px;
+  color: var(--dusk);
+}
+.team-sponsor { font-size: 14px; color: var(--ink); }
+.team-sponsor-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-right: 6px;
+}
+.team-players { list-style: none; margin: 2px 0 0; padding: 0; }
+.team-players li {
+  font-size: 14px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--edge);
+}
+.team-players li:last-child { border-bottom: none; }
+.team-captain {
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--pool);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* ----------------------------------------------------------- top sponsors */
+.tier-name { font-size: 13px; letter-spacing: 0.16em; color: var(--dusk); }
+.sponsor-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.sponsor-card {
+  /* Sponsor logos arrive full colour and fight the desert palette. White
+     cards with real padding keep them legible and keep sponsors happy. */
+  background: #FFFFFF;
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  padding: 18px 16px;
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.sponsor-logo { max-height: 64px; width: auto; object-fit: contain; }
+.sponsor-name { font-weight: 600; font-size: 15px; color: var(--ink); }
+
+/* -------------------------------------------------------------- questions */
+.qa-textarea { display: block; width: 100%; resize: vertical; line-height: 1.5; }
+.qa-compose-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.qa-compose-row .field { flex: 1 1 180px; }
+.qa-sent { margin-top: 10px; font-size: 14px; color: var(--pool-deep); font-weight: 600; }
+.qa-item { display: flex; flex-direction: column; gap: 6px; }
+.qa-q { font-weight: 600; font-size: 16px; }
+.qa-meta { font-size: 12px; color: var(--mute); }
+.qa-pending {
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--mute);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.qa-a {
+  background: var(--sand);
+  border-left: 3px solid var(--pool);
+  border-radius: 0 10px 10px 0;
+  padding: 10px 12px;
+  font-size: 15px;
+  margin-top: 2px;
+}
+.qa-a-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+  margin-bottom: 3px;
+}
+.qa-answerbox { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--edge); }
+
+/* ------------------------------------------------------------- guide, info */
 .con-item { padding: 10px 0; border-bottom: 1px solid var(--edge); }
 .con-item:last-child { border-bottom: none; }
 .con-label { font-weight: 600; }
@@ -510,15 +616,18 @@ const PREVIEW = FIREBASE_CONFIG.apiKey === "PASTE_ME";
 const LS = {
   liked: "pinv_liked",
   admin: "pinv_admin",
+  asked: "pinv_asked",
 };
 
+/* Donny's seven, in his order. Sep 15. */
 const TABS = [
-  { id: "itinerary",   label: "Itinerary" },
-  { id: "field",       label: "The Field" },
-  { id: "leaderboard", label: "Leaderboard" },
-  { id: "gallery",     label: "Gallery" },
-  { id: "concierge",   label: "Concierge" },
-  { id: "resources",   label: "Resources" },
+  { id: "agenda",    label: "Agenda" },
+  { id: "teams",     label: "Teams" },
+  { id: "sponsors",  label: "Top Sponsors" },
+  { id: "guide",     label: "Program Guide" },
+  { id: "spouse",    label: "Spouse Guide" },
+  { id: "photos",    label: "Photos" },
+  { id: "questions", label: "Questions" },
 ];
 
 /* ------------------------------------------------------------ store layer */
@@ -601,20 +710,20 @@ const PREVIEW_SEED = {
   settings: {
     marquee: "Welcome to the desert. Sample content throughout while the wall is in preview.",
     adminPin: "0000",
-    tabs: { itinerary: true, field: true, leaderboard: true, gallery: true, concierge: true, resources: true },
+    tabs: { agenda: true, teams: true, sponsors: true, guide: true, spouse: true, photos: true, questions: true },
+    /* false: a question goes to the organizers and appears once answered.
+       true: every question is public the moment it is asked. */
+    qaPublic: false,
   },
-  teams: {
-    t1: { name: "Sample Team A", players: "Replace via Admin", order: 1, sample: true },
-    t2: { name: "Sample Team B", players: "Replace via Admin", order: 2, sample: true },
-    t3: { name: "Sample Team C", players: "Replace via Admin", order: 3, sample: true },
-    t4: { name: "Sample Team D", players: "Replace via Admin", order: 4, sample: true },
-  },
-  scores: {
-    /* Net round-1 scores. t2 and t3 tie on purpose to exercise shared rank.
-       t4 has no card yet, also on purpose. */
-    t1: { r1: 61.9 },
-    t2: { r1: 63.1 },
-    t3: { r1: 63.1 },
+  questions: {
+    q1: {
+      text: "Sample question. Is there a shuttle from the resort to the clubhouse each morning?",
+      name: "Sample Attendee",
+      ts: 1757900000000,
+      answer: "Sample answer. Answer a question from the gear icon and it appears here for everyone.",
+      answeredTs: 1757900600000,
+      sample: true,
+    },
   },
   photos: {},
   photoLikes: {},
@@ -705,8 +814,8 @@ function Masthead({ agenda }) {
   );
 }
 
-/* -------------------------------------------------------------- itinerary */
-function Itinerary() {
+/* ----------------------------------------------------------------- agenda */
+function Agenda() {
   const agenda = useJson("data/agenda.json");
   const [dayId, setDayId] = useState(null);
   if (agenda === undefined) return null;
@@ -716,7 +825,7 @@ function Itinerary() {
   const active = agenda.days.find((d) => d.id === dayId) || agenda.days[0];
   return (
     <section>
-      <h2 className="t-display page-title">Itinerary</h2>
+      <h2 className="t-display page-title">Agenda</h2>
       <p className="page-sub">The schedule for your stay.</p>
       <div className="day-pills">
         {agenda.days.map((d) => (
@@ -758,37 +867,92 @@ function Itinerary() {
   );
 }
 
-/* ------------------------------------------------------------------ field */
-function Field() {
-  const roster = useJson("data/roster.json");
+/* ------------------------------------------------------------------ teams */
+/* Per Donny: club, sponsor, players. The search matches any of the three, so
+   a partner can find their own club or look up who a sponsor brought. */
+function Teams() {
+  const data = useJson("data/teams.json");
   const [q, setQ] = useState("");
-  if (roster === undefined) return null;
-  const attendees = roster?.attendees || [];
-  const shown = attendees.filter((a) =>
-    (a.name + " " + (a.org || "")).toLowerCase().includes(q.toLowerCase()));
-  const initials = (name) =>
-    name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  if (data === undefined) return null;
+  const teams = data?.teams || [];
+  const needle = q.trim().toLowerCase();
+  const shown = !needle ? teams : teams.filter((t) =>
+    [t.club, t.sponsor, ...(t.players || [])].join(" ").toLowerCase().includes(needle));
+
   return (
     <section>
-      <h2 className="t-display page-title">The Field</h2>
-      <p className="page-sub">Who is here this week.</p>
-      <input className="search" placeholder="Find a partner" value={q}
+      <h2 className="t-display page-title">Teams</h2>
+      <p className="page-sub">Every club in the field, with its sponsor and players.</p>
+      <input className="search" placeholder="Find a club, sponsor, or player" value={q}
         onChange={(e) => setQ(e.target.value)} />
-      {shown.length === 0 ? (
+      {teams.length === 0 ? (
+        <div className="empty">Teams will appear here once pairings are set.</div>
+      ) : shown.length === 0 ? (
         <div className="empty">No matches.</div>
       ) : (
         <div className="grid-cards">
-          {shown.map((a) => (
-            <div className="card" key={a.slug}>
-              <div className="person">
-                {a.photo
-                  ? <img className="person-photo" src={a.photo} alt={a.name} />
-                  : <div className="person-mono">{initials(a.name)}</div>}
-                <div>
-                  <div className="person-name">{a.name} {a.placeholder && <PhChip />}</div>
-                  <div className="person-meta">{a.org}</div>
-                  {a.role && <div className="person-meta">{a.role}</div>}
+          {shown.map((t) => (
+            <div className="card roof team-card" key={t.id || t.club}>
+              <div className="team-club">
+                {t.club} {t.placeholder && <PhChip />}
+              </div>
+              {t.sponsor && (
+                <div className="team-sponsor">
+                  <span className="team-sponsor-label">Sponsor</span> {t.sponsor}
                 </div>
+              )}
+              {(t.players || []).length > 0 && (
+                <ul className="team-players">
+                  {t.players.map((p, i) => (
+                    <li key={i}>
+                      {p}
+                      {t.captain === p && <span className="team-captain">Captain</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------- top sponsors */
+function Sponsors() {
+  const data = useJson("data/sponsors.json");
+  if (data === undefined) return null;
+  const tiers = data?.tiers || [];
+  return (
+    <section>
+      <h2 className="t-display page-title">Top Sponsors</h2>
+      <p className="page-sub">{data?.intro}</p>
+      {tiers.length === 0 ? (
+        <div className="empty">Sponsors will be announced here.</div>
+      ) : (
+        <div className="stack">
+          {tiers.map((tier) => (
+            <div key={tier.id}>
+              <div className="sunburst">
+                <span className="t-display tier-name">
+                  {tier.name} {tier.placeholder && <PhChip />}
+                </span>
+              </div>
+              <div className="sponsor-grid">
+                {(tier.sponsors || []).map((s, i) => {
+                  const inner = s.logo
+                    ? <img className="sponsor-logo" src={s.logo} alt={s.name} />
+                    : <span className="sponsor-name">{s.name}</span>;
+                  return (
+                    <div className="sponsor-card" key={i}>
+                      {s.url
+                        ? <a href={s.url} target="_blank" rel="noopener">{inner}</a>
+                        : inner}
+                      {s.placeholder && <div style={{ marginTop: 8 }}><PhChip /></div>}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -799,6 +963,18 @@ function Field() {
 }
 
 /* ------------------------------------------------------------ leaderboard */
+/* DORMANT as of Sep 15. Donny's tab list has no Leaderboard, because Golf
+   Genius runs scoring for this event and computes the handicap allowances
+   itself. Keeping two leaderboards means the scoring table types every number
+   twice and they disagree by Tuesday afternoon.
+
+   This code is parked, not deleted, for two reasons: the Golf Genius GGIDs
+   have not arrived yet, and the Tuesday Shoot-Out reveal may still want a
+   home. To revive it, add { id: "leaderboard", label: "Leaderboard" } back to
+   TABS and restore its line in the tab switch in App(). It still needs the
+   teams/ and scores/ Firebase nodes, which are no longer seeded.
+   Ask Jim before deleting any of it. */
+
 /* Two rounds, net team scores, entered by the scoring table. Standings math
    lives here and only here. Rank compares score against par for the rounds a
    team has posted, so a one-round team and a two-round team sit fairly on one
@@ -1028,7 +1204,7 @@ function Gallery({ admin }) {
 
   return (
     <section>
-      <h2 className="t-display page-title">Gallery</h2>
+      <h2 className="t-display page-title">Photos</h2>
       <p className="page-sub">Photos from the week, posted by the room.</p>
       <div className="upload-row">
         {/* Both paths ship together. Camera capture and library. Hard rule. */}
@@ -1069,60 +1245,202 @@ function Gallery({ admin }) {
   );
 }
 
-/* -------------------------------------------------------------- concierge */
-function Concierge() {
-  const data = useJson("data/concierge.json");
+/* ---------------------------------------------------- guide and spouse guide */
+/* Both guides are the same shape: titled cards holding labelled items. One
+   renderer, two data files. */
+function InfoSections({ sections }) {
+  return (
+    <div className="stack">
+      {(sections || []).map((sec) => (
+        <div className="card roof" key={sec.id}>
+          <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
+            {sec.title} {sec.placeholder && <PhChip />}
+          </h3>
+          {sec.logo && <img className="con-logo" src={sec.logo} alt="" />}
+          {(sec.items || []).map((item, i) => (
+            <div className="con-item" key={i}>
+              <div className="con-label">{item.label} {item.placeholder && <PhChip />}</div>
+              {item.detail && <div className="con-detail">{item.detail}</div>}
+              {(item.phone || item.url) && (
+                <div style={{ fontSize: 14, marginTop: 4, display: "flex", gap: 14, flexWrap: "wrap" }}>
+                  {item.phone && <a href={"tel:" + item.phone.replace(/[^0-9+]/g, "")}>{item.phone}</a>}
+                  {item.url && <a href={item.url} target="_blank" rel="noopener">{item.url.replace(/^https?:\/\/(www\.)?/, "")}</a>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Guide() {
+  const data = useJson("data/guide.json");
   if (data === undefined) return null;
+  const docs = data?.documents || [];
   return (
     <section>
-      <h2 className="t-display page-title">Concierge</h2>
-      <p className="page-sub">Everything you need to get here and get around.</p>
-      <div className="stack">
-        {(data?.sections || []).map((sec) => (
-          <div className="card roof" key={sec.id}>
-            <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
-              {sec.title} {sec.placeholder && <PhChip />}
-            </h3>
-            {sec.logo && <img className="con-logo" src={sec.logo} alt="" />}
-            {sec.items.map((item, i) => (
-              <div className="con-item" key={i}>
-                <div className="con-label">{item.label} {item.placeholder && <PhChip />}</div>
-                {item.detail && <div className="con-detail">{item.detail}</div>}
-                {(item.phone || item.url) && (
-                  <div style={{ fontSize: 14, marginTop: 4, display: "flex", gap: 14, flexWrap: "wrap" }}>
-                    {item.phone && <a href={"tel:" + item.phone.replace(/[^0-9+]/g, "")}>{item.phone}</a>}
-                    {item.url && <a href={item.url} target="_blank" rel="noopener">{item.url.replace(/^https?:\/\/(www\.)?/, "")}</a>}
-                  </div>
-                )}
+      <h2 className="t-display page-title">Event Program Guide</h2>
+      <p className="page-sub">{data?.intro}</p>
+      <InfoSections sections={data?.sections} />
+      {docs.length > 0 && (
+        <div className="card roof roof-mustard" style={{ marginTop: 12 }}>
+          <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
+            Documents
+          </h3>
+          {docs.map((d, i) => (
+            <div className="con-item" key={i}>
+              <div className="con-label">
+                {d.url ? <a href={d.url} target="_blank" rel="noopener">{d.title}</a> : d.title}
+                {" "}{d.placeholder && <PhChip />}
               </div>
-            ))}
-          </div>
-        ))}
-      </div>
+              {d.detail && <div className="con-detail">{d.detail}</div>}
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
 
-/* -------------------------------------------------------------- resources */
-function Resources() {
-  const data = useJson("data/resources.json");
+function SpouseGuide() {
+  const data = useJson("data/spouse-activities.json");
   if (data === undefined) return null;
-  const items = data?.resources || [];
   return (
     <section>
-      <h2 className="t-display page-title">Resources</h2>
-      <p className="page-sub">Documents and links worth keeping.</p>
-      {items.length === 0 ? (
-        <div className="empty">Nothing here yet.</div>
+      <h2 className="t-display page-title">Spouse Activities Guide</h2>
+      <p className="page-sub">{data?.intro}</p>
+      <InfoSections sections={data?.sections} />
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- questions */
+/* Attendees post, organizers answer. A question is published once it has an
+   answer, so the wall never shows a column of unanswered questions to a room
+   of partners. The asker always sees their own, marked as sent, and an
+   organizer can flip settings/qaPublic to publish everything immediately. */
+const fmtWhen = (ts) => {
+  if (!ts) return "";
+  const d = new Date(ts);
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) +
+    " at " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+};
+
+function AnswerBox({ id, existing }) {
+  const [text, setText] = useState(existing || "");
+  const [saved, setSaved] = useState(false);
+  const post = () => {
+    const t = text.trim();
+    if (!t) return;
+    store.set(`questions/${id}/answer`, t);
+    store.set(`questions/${id}/answeredTs`, Date.now());
+    setSaved(true);
+  };
+  return (
+    <div className="qa-answerbox">
+      <textarea className="field qa-textarea" rows="3"
+        placeholder="Write an answer. It publishes to everyone."
+        value={text}
+        onChange={(e) => { setText(e.target.value); setSaved(false); }} />
+      <div style={{ display: "flex", gap: 8, marginTop: 8, alignItems: "center" }}>
+        <button className="btn btn-sm" onClick={post}>
+          {existing ? "Update answer" : "Post answer"}
+        </button>
+        {saved && <span style={{ fontSize: 13, color: "var(--pool-deep)" }}>Published.</span>}
+      </div>
+    </div>
+  );
+}
+
+function Questions({ admin }) {
+  const questions = useNode("questions");
+  const settings = useNode("settings");
+  const [text, setText] = useState("");
+  const [name, setName] = useState("");
+  const [mine, setMine] = useState(() => lsGet(LS.asked, {}));
+  const [sent, setSent] = useState(false);
+  if (questions === undefined || settings === undefined) return null;
+
+  const qaPublic = settings?.qaPublic === true;
+
+  const submit = async () => {
+    const t = text.trim();
+    if (!t) return;
+    const id = await store.push("questions", {
+      text: t,
+      name: name.trim() || null,
+      ts: Date.now(),
+    });
+    const next = { ...mine, [id]: true };
+    setMine(next);
+    lsSet(LS.asked, next);
+    setText("");
+    setSent(true);
+  };
+
+  const all = Object.entries(questions || {}).sort((a, b) => (b[1].ts || 0) - (a[1].ts || 0));
+  const visible = all.filter(([id, q]) => admin || qaPublic || q.answer || mine[id]);
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Questions</h2>
+      <p className="page-sub">
+        Ask the organizers anything about the week. Answers post here for everyone.
+      </p>
+
+      <div className="card roof roof-terra">
+        <textarea className="field qa-textarea" rows="3"
+          placeholder="What would you like to know?"
+          value={text}
+          onChange={(e) => { setText(e.target.value); setSent(false); }} />
+        <div className="qa-compose-row">
+          <input className="field" placeholder="Your name (optional)" value={name}
+            onChange={(e) => setName(e.target.value)} />
+          <button className="btn" onClick={submit} disabled={!text.trim()}>Send</button>
+        </div>
+        {sent && (
+          <div className="qa-sent">
+            Sent to the organizers. You will see the answer here.
+          </div>
+        )}
+      </div>
+
+      {visible.length === 0 ? (
+        <div className="empty" style={{ marginTop: 14 }}>
+          No questions yet. Ask the first one.
+        </div>
       ) : (
-        <div className="stack">
-          {items.map((r, i) => (
-            <div className="card" key={i}>
-              <div className="con-label">
-                {r.url ? <a href={r.url} target="_blank" rel="noopener">{r.title}</a> : r.title}
-                {" "}{r.placeholder && <PhChip />}
+        <div className="stack" style={{ marginTop: 14 }}>
+          {visible.map(([id, q]) => (
+            <div className="card qa-item" key={id}>
+              <div className="qa-q">{q.text} {q.sample && <PhChip />}</div>
+              <div className="qa-meta">
+                {q.name || "Asked anonymously"}
+                {q.ts && <span> &middot; {fmtWhen(q.ts)}</span>}
+                {!q.answer && mine[id] && !admin && (
+                  <span className="qa-pending">Sent to the organizers</span>
+                )}
+                {!q.answer && admin && <span className="qa-pending">Needs an answer</span>}
               </div>
-              {r.detail && <div className="con-detail">{r.detail}</div>}
+              {q.answer && (
+                <div className="qa-a">
+                  <span className="qa-a-label">Organizers</span>
+                  {q.answer}
+                </div>
+              )}
+              {admin && (
+                <div>
+                  <AnswerBox id={id} existing={q.answer} />
+                  <button className="btn btn-danger btn-sm" style={{ marginTop: 8 }}
+                    onClick={() => {
+                      if (confirm("Remove this question for everyone?")) {
+                        store.remove(`questions/${id}`);
+                      }
+                    }}>Remove question</button>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -1164,29 +1482,19 @@ function PinGate({ onPass, onClose }) {
 
 function AdminPanel({ onExit }) {
   const settings = useNode("settings");
-  const teams = useNode("teams");
   const [marquee, setMarquee] = useState(null);
-  const [newTeam, setNewTeam] = useState("");
-  const [newPlayers, setNewPlayers] = useState("");
-  if (settings === undefined || teams === undefined) return null;
+  if (settings === undefined) return null;
 
   const tabVis = settings?.tabs || {};
+  const qaPublic = settings?.qaPublic === true;
   const marqueeVal = marquee ?? settings?.marquee ?? "";
-
-  const addTeam = () => {
-    const name = newTeam.trim();
-    if (!name) return;
-    const order = Object.keys(teams || {}).length + 1;
-    store.push("teams", { name, players: newPlayers.trim(), order });
-    setNewTeam(""); setNewPlayers("");
-  };
 
   return (
     <section>
       <h2 className="t-display page-title">Admin</h2>
       <p className="page-sub">
-        Staff controls. Score entry lives on the Leaderboard tab while you are
-        signed in.
+        Staff controls. Teams, sponsors, and both guides are set in the data
+        files, not here. Questions are answered on the Questions tab.
       </p>
 
       <div className="card admin-section">
@@ -1200,27 +1508,22 @@ function AdminPanel({ onExit }) {
       </div>
 
       <div className="card admin-section">
-        <h3 className="t-display admin-h">Teams</h3>
-        {Object.entries(teams || {}).map(([id, t]) => (
-          <div className="toggle-row" key={id}>
-            <div>
-              <div style={{ fontWeight: 600 }}>{t.name} {t.sample && <PhChip />}</div>
-              {t.players && <div style={{ fontSize: 13, color: "var(--dim)" }}>{t.players}</div>}
+        <h3 className="t-display admin-h">Questions</h3>
+        <div className="toggle-row">
+          <div>
+            <div style={{ fontWeight: 600 }}>Publish questions before they are answered</div>
+            <div style={{ fontSize: 13, color: "var(--dim)" }}>
+              Off is safer. A question stays with the organizers until you answer
+              it, and the asker sees their own marked as sent.
             </div>
-            <button className="btn btn-danger btn-sm" onClick={() => {
-              if (confirm(`Remove ${t.name} and its scores?`)) {
-                store.remove(`teams/${id}`);
-                store.remove(`scores/${id}`);
-              }
-            }}>Remove</button>
           </div>
-        ))}
-        <div style={{ display: "grid", gap: 8, marginTop: 12 }}>
-          <input className="field" placeholder="Team name" value={newTeam}
-            onChange={(e) => setNewTeam(e.target.value)} />
-          <input className="field" placeholder="Players (optional)" value={newPlayers}
-            onChange={(e) => setNewPlayers(e.target.value)} />
-          <button className="btn btn-sm" onClick={addTeam}>Add team</button>
+          <button className={"btn btn-sm" + (qaPublic ? "" : " btn-quiet")}
+            onClick={() => store.set("settings/qaPublic", !qaPublic)}>
+            {qaPublic ? "On" : "Off"}
+          </button>
+        </div>
+        <div style={{ fontSize: 13, color: "var(--dim)", marginTop: 10 }}>
+          Answer questions on the Questions tab while you are signed in.
         </div>
       </div>
 
@@ -1244,7 +1547,7 @@ function AdminPanel({ onExit }) {
 
 /* -------------------------------------------------------------------- app */
 function App() {
-  const [tab, setTab] = useState("itinerary");
+  const [tab, setTab] = useState("agenda");
   const [admin, setAdmin] = useState(() => lsGet(LS.admin, false));
   const [gate, setGate] = useState(false);
   const settings = useNode("settings");
@@ -1260,7 +1563,7 @@ function App() {
   }, [tab, visibleTabs.map((t) => t.id).join(",")]);
 
   const enterAdmin = () => { setAdmin(true); lsSet(LS.admin, true); setGate(false); setTab("admin"); };
-  const exitAdmin = () => { setAdmin(false); lsSet(LS.admin, false); setTab("itinerary"); };
+  const exitAdmin = () => { setAdmin(false); lsSet(LS.admin, false); setTab("agenda"); };
 
   return (
     <React.Fragment>
@@ -1291,12 +1594,13 @@ function App() {
       </nav>
 
       <main className="shell">
-        {tab === "itinerary" && <Itinerary />}
-        {tab === "field" && <Field />}
-        {tab === "leaderboard" && <Leaderboard admin={admin} />}
-        {tab === "gallery" && <Gallery admin={admin} />}
-        {tab === "concierge" && <Concierge />}
-        {tab === "resources" && <Resources />}
+        {tab === "agenda" && <Agenda />}
+        {tab === "teams" && <Teams />}
+        {tab === "sponsors" && <Sponsors />}
+        {tab === "guide" && <Guide />}
+        {tab === "spouse" && <SpouseGuide />}
+        {tab === "photos" && <Gallery admin={admin} />}
+        {tab === "questions" && <Questions admin={admin} />}
         {tab === "admin" && admin && <AdminPanel onExit={exitAdmin} />}
         <SunDivider />
         <footer className="footer">

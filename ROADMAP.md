@@ -38,6 +38,20 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       toggles. Accept: admin state survives reload via pinv_admin, every
       admin write round-trips through the store layer.
 
+## Phase 0b. Donny's tab structure (Sep 15)
+
+- [x] **P0b.1 Seven tabs.** Agenda, Teams, Top Sponsors, Program Guide, Spouse
+      Guide, Photos, Questions, in Donny's order. Itinerary renamed to Agenda,
+      Gallery to Photos, The Field rebuilt as Teams (club, sponsor, players),
+      Concierge and Resources merged into the Program Guide.
+- [x] **P0b.2 Questions.** Attendees post, organizers answer. Moderated by
+      default, `settings/qaPublic` to publish everything. Accept: full loop
+      verified, post as attendee then answer as admin, badge clears and the
+      answer publishes.
+- [x] **P0b.3 Leaderboard parked.** Not in Donny's list. Golf Genius owns
+      scoring. Code kept with revival instructions, pending Jim's call on
+      deleting it.
+
 ## Phase 1. Content intake
 
 - [x] **P1.1 Event dates and agenda.** Done Sep 14 from the final agenda doc
@@ -52,17 +66,27 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       Round 1 Nicklaus Private (two-person scramble), Round 2 Palmer Private
       (two-person shamble). Par values still flat-72 PLACEHOLDER in
       data/course.json until Jim confirms the scorecards.
-- [!] **P1.5 Teams.** Two-person pairings entered via admin panel, or
-      confirmed TBD until on site. Accept: teams render on Leaderboard.
+- [!] **P1.5 Teams.** Club, sponsor, and players into data/teams.json. Accept:
+      no sample entries remain on Teams.
+- [!] **P1.7 Top Sponsors.** Names, tiers, and logos from Donny into
+      data/sponsors.json and assets/sponsors/. Accept: no placeholder tier
+      remains, logos render crisp at 2x.
+- [!] **P1.8 Spouse Activities Guide.** Daytime program from Amy into
+      data/spouse-activities.json. Accept: no placeholder remains.
+- [!] **P1.9 Golf Genius.** GGIDs from Amy, one per round. Accept: deep link
+      opens the Golf Genius app on a phone that has it installed.
 - [~] **P1.6 Concierge content.** Venues, travel, dress code, spouse policy,
       and extra golf filled from the doc Sep 14. Still open: Who to Call
       (Team Captain Host names and numbers).
 
 ## Phase 2. Go live
 
-- [ ] **P2.1 Firebase project.** Jim creates it, paste config into
-      FIREBASE_CONFIG, publish permanent rules and READ THEM BACK. Accept:
-      preview banner gone, writes visible from a second device.
+- [ ] **P2.1 Firebase project. NOW THE CRITICAL PATH.** Jim creates it, paste
+      config into FIREBASE_CONFIG, publish permanent rules and READ THEM BACK.
+      Two of the seven tabs (Photos, Questions) do nothing across devices
+      without it, and Questions is a live feature Donny asked for. Accept:
+      preview banner gone, a question asked on one phone is answerable on
+      another.
 - [x] **P2.2 GitHub repo and Pages.** Done Sep 15. Public repo
       creightonjames-jpg/cgp-partners-invitational, Pages from main root, live
       at https://creightonjames-jpg.github.io/cgp-partners-invitational/.

@@ -145,9 +145,11 @@ Anything fixed before the event lives in the repo as a static file.
 | Per device like history, admin session | Local storage, `pinv_` prefix |
 | Videos | YouTube or Vimeo unlisted embeds, never repo files |
 
-**Firebase nodes:** `settings/`, `teams/`, `scores/`, `photos/`, `photoLikes/`
+**Firebase nodes:** `settings/`, `questions/`, `photos/`, `photoLikes/`.
+`teams/` and `scores/` belong to the parked leaderboard and are no longer
+seeded or written.
 
-**Local storage keys:** `pinv_liked`, `pinv_admin`
+**Local storage keys:** `pinv_liked`, `pinv_admin`, `pinv_asked`
 
 ---
 
@@ -215,16 +217,39 @@ cards (butterfly roof angle on card headers), scorecard grid, mountain horizon.
 
 ---
 
-## The six tabs
+## The seven tabs
+
+Donny set this list on Sep 15. His order, his names. Do not add, rename, or
+reorder a tab without him.
 
 | Tab | Function | Data source |
 |---|---|---|
-| Itinerary | Agenda with day pills | data/agenda.json |
-| The Field | Attendee roster and directory | data/roster.json |
-| Leaderboard | Scramble standings, admin score entry | Firebase teams/ scores/ |
-| Gallery | Photo uploads with likes | Firebase photos/ |
-| Concierge | Venue, travel, contacts | data/concierge.json |
-| Resources | Links and documents | data/resources.json |
+| Agenda | Schedule with day pills | data/agenda.json |
+| Teams | Club, sponsor, players, searchable | data/teams.json |
+| Top Sponsors | Logo grid by tier | data/sponsors.json |
+| Program Guide | Venues, format, dress, travel, documents | data/guide.json |
+| Spouse Guide | Daytime program for spouses | data/spouse-activities.json |
+| Photos | Photo uploads with likes | Firebase photos/ |
+| Questions | Attendees ask, organizers answer | Firebase questions/ |
+
+**Questions is moderated by default.** A question goes to the organizers and
+publishes when it is answered. The asker sees their own marked as sent, via
+`pinv_asked`. A room of partners should never see a column of unanswered
+questions. `settings/qaPublic` flips this to publish everything immediately,
+toggled from the admin panel.
+
+**The Leaderboard is parked, not deleted.** Golf Genius runs scoring for this
+event and computes the handicap allowances itself, so a second leaderboard
+would mean the scoring table keys every number twice. The component and
+`computeStandings` are still in index.html with a comment explaining how to
+revive them. Ask Jim before deleting any of it. Golf Genius deep links use
+`https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>`, which is the only URL
+shape that opens their app instead of a browser. GGIDs have not arrived yet.
+
+**Orphaned data files.** `data/concierge.json`, `data/resources.json`, and
+`data/roster.json` were folded into `guide.json` and `teams.json` on Sep 15.
+Nothing reads them. They are still on disk pending Jim's approval to delete.
+Do not edit them expecting a change on the wall.
 
 ---
 
