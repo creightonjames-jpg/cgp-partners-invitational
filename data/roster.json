@@ -1,0 +1,7 @@
+{
+  "_note": "PLACEHOLDER. Replace with the real attendee list when Jim supplies it (ROADMAP P1.2). Never invent names. photo is a path under assets/attendees/ or null for the monogram fallback.",
+  "attendees": [
+    { "slug": "sample-partner-1", "name": "Sample Partner", "org": "Replace with real roster", "role": "Placeholder entry", "photo": null, "placeholder": true },
+    { "slug": "sample-partner-2", "name": "Sample Partner", "org": "Replace with real roster", "role": "Placeholder entry", "photo": null, "placeholder": true }
+  ]
+}

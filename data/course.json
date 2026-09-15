@@ -1,0 +1,25 @@
+{
+  "_note": "Rounds and formats from the final agenda doc. Par values are PLACEHOLDER (flat 72) until Jim confirms the scorecards (ROADMAP P1.4). Scores entered on the wall are net team scores computed at the scoring table.",
+  "shootout": "The top three scoring teams, and ties, advance to a two-hole Shoot-Out for first, second, and third.",
+  "parPlaceholder": true,
+  "rounds": [
+    {
+      "id": "r1",
+      "label": "Round 1",
+      "day": "Monday, October 5",
+      "course": "Nicklaus Private",
+      "format": "Two-person scramble",
+      "handicap": "35% of the low index plus 15% of the high",
+      "par": 72
+    },
+    {
+      "id": "r2",
+      "label": "Round 2",
+      "day": "Tuesday, October 6",
+      "course": "Palmer Private",
+      "format": "Two-person shamble",
+      "handicap": "70% of GHIN index",
+      "par": 72
+    }
+  ]
+}

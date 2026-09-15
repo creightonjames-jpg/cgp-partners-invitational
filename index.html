@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F2E8">
+<title>The Partners Invitational</title>
+<meta name="description" content="The live wall for the 18th Annual Partners Invitational at PGA WEST, La Quinta, California. October 4 to 7, 2026.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Yellowtail&family=Inter:wght@400;500;600;700&display=swap">
+
+<style id="wall-css">
+/* ==========================================================================
+   THE PARTNERS INVITATIONAL. Design system.
+   Mid-century Palm Springs: light, airy, cream and aqua and mustard.
+   This block is the single source of truth for tokens and motifs.
+   ROADMAP P0.2. Palette and rules in CLAUDE.md.
+   ========================================================================== */
+
+:root {
+  /* Palette. Fourteen tokens. */
+  --linen:     #F7F2E8;  /* page background, warm cream                    */
+  --paper:     #FFFDF6;  /* card surface                                   */
+  --sand:      #EFE7D6;  /* form fields, inactive pills, table stripes     */
+  --pool:      #3E8E90;  /* primary accent, turquoise                      */
+  --pool-deep: #2C6B6D;  /* pressed and hover, deep borders                */
+  --mustard:   #D9A441;  /* secondary accent, leader gold, awards          */
+  --terra:     #C2643F;  /* warm accent, terracotta                        */
+  --dusk:      #55496B;  /* mountain purple, quiet headers                 */
+  --ink:       #2E2A24;  /* body text, warm near-black                     */
+  --dim:       #6F6758;  /* secondary text, metadata                       */
+  --mute:      #9C927F;  /* timestamps, fine print                         */
+  --edge:      #E2D8C3;  /* card borders, dividers                         */
+  --danger:    #B0442E;  /* destructive admin actions                      */
+  --glow:      rgba(62, 142, 144, 0.10); /* pool tint, hover and selected  */
+
+  /* Type. Yellowtail is rationed to the hero greeting. Anywhere else it
+     reads as a cocktail menu. */
+  --font-display: 'Josefin Sans', 'Avenir Next', 'Futura', sans-serif;
+  --font-script:  'Yellowtail', cursive;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --shell-max: 1080px;
+  --measure: 66ch;
+
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+/* ------------------------------------------------------------- baseline */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  min-height: 100svh;
+  background: var(--linen);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; font-size: 16px; }
+img { max-width: 100%; display: block; }
+a { color: var(--pool-deep); }
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.t-script { font-family: var(--font-script); font-weight: 400; }
+
+/* --------------------------------------------------------------- shell */
+.shell {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 0 16px calc(48px + var(--safe-b));
+}
+
+/* -------------------------------------------------------------- motifs */
+/* Breeze block screen. A quatrefoil grid, the concrete screen wall on every
+   1962 facade in the valley. Used as a low-contrast band, never full page. */
+.breeze {
+  background-color: var(--pool);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23FFFDF6' stroke-opacity='0.35' stroke-width='2'%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='0' cy='0' r='14'/%3E%3Ccircle cx='48' cy='0' r='14'/%3E%3Ccircle cx='0' cy='48' r='14'/%3E%3Ccircle cx='48' cy='48' r='14'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 48px 48px;
+}
+
+/* Sunburst divider. The starburst clock, reduced to a rule. */
+.sunburst {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0 18px;
+  color: var(--mustard);
+}
+.sunburst::before, .sunburst::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--edge);
+}
+.sunburst svg { flex: none; }
+
+/* Roofline card. The butterfly roof as a header accent: two shallow angled
+   planes meeting in a valley. Applied with .roof on a .card. */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  padding: 16px;
+  position: relative;
+}
+.roof { padding-top: 22px; overflow: hidden; }
+.roof::before, .roof::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 8px;
+  background: var(--pool);
+}
+.roof::before { left: 0;  transform: skewY(1.6deg);  transform-origin: left top; }
+.roof::after  { right: 0; transform: skewY(-1.6deg); transform-origin: right top; }
+.roof.roof-mustard::before, .roof.roof-mustard::after { background: var(--mustard); }
+.roof.roof-terra::before,   .roof.roof-terra::after   { background: var(--terra); }
+
+/* -------------------------------------------------------------- masthead */
+.masthead { position: relative; }
+.masthead-band {
+  height: 34px;
+  border-bottom: 3px solid var(--pool-deep);
+}
+.masthead-inner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 26px 16px 0;
+  text-align: center;
+}
+.masthead-kicker {
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 0.28em;
+}
+.masthead-script {
+  color: var(--terra);
+  font-size: clamp(26px, 6vw, 38px);
+  line-height: 1.1;
+  margin: 10px 0 0;
+}
+.masthead-title {
+  font-size: clamp(30px, 7.5vw, 54px);
+  line-height: 1.05;
+  margin: 2px 0 10px;
+  color: var(--ink);
+}
+.masthead-venue {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--pool-deep);
+}
+.masthead-logo {
+  margin: 18px auto 0;
+  height: 74px;
+  width: auto;
+  display: inline-block;
+}
+.con-logo {
+  height: 44px;
+  width: auto;
+  margin-bottom: 10px;
+  /* the source PNGs are dark-on-white; multiply drops the white onto paper */
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+/* Mountain horizon. The Santa Rosas at dusk, in three quiet ridges. */
+.horizon { display: block; width: 100%; height: 54px; margin-top: 6px; }
+
+/* --------------------------------------------------------------- marquee */
+.marquee {
+  background: var(--dusk);
+  color: var(--linen);
+  font-size: 14px;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+/* Preview banner. Only exists until Firebase is wired. */
+.preview-banner {
+  background: var(--mustard);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  padding: 7px 16px;
+}
+
+/* Placeholder chip. Marks sample content so it can never pass for real. */
+.chip-ph {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  background: var(--terra);
+  border-radius: 999px;
+  padding: 2px 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--linen) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--edge);
+}
+.nav-row {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 16px;
+  scrollbar-width: none;
+}
+.nav-row::-webkit-scrollbar { display: none; }
+.nav-pill {
+  flex: none;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  color: var(--dim);
+  border-radius: 999px;
+  padding: 8px 16px 7px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nav-pill.active {
+  background: var(--pool);
+  border-color: var(--pool-deep);
+  color: var(--paper);
+}
+.nav-gear { margin-left: auto; }
+
+/* ------------------------------------------------------------- sections */
+.page-title { font-size: 22px; letter-spacing: 0.16em; margin: 26px 0 4px; }
+.page-sub   { color: var(--dim); font-size: 14px; margin: 0 0 18px; max-width: var(--measure); }
+
+.stack { display: grid; gap: 12px; }
+.grid-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.empty {
+  text-align: center;
+  color: var(--dim);
+  padding: 36px 16px;
+  border: 1px dashed var(--edge);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+/* ----------------------------------------------------------------- pills */
+.day-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.day-pill {
+  border: 1px solid var(--edge);
+  background: var(--sand);
+  color: var(--dim);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.day-pill.active { background: var(--dusk); border-color: var(--dusk); color: var(--linen); }
+
+/* -------------------------------------------------------------- itinerary */
+.session { display: flex; gap: 14px; }
+.session-time {
+  flex: none;
+  width: 82px;
+  color: var(--pool-deep);
+  font-weight: 700;
+  font-size: 13px;
+  padding-top: 2px;
+}
+.session-title { font-weight: 600; }
+.session-detail { color: var(--dim); font-size: 14px; margin-top: 2px; }
+
+/* ---------------------------------------------------------------- roster */
+.person { display: flex; gap: 12px; align-items: center; }
+.person-photo, .person-mono {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  flex: none;
+  object-fit: cover;
+  border: 2px solid var(--edge);
+}
+.person-mono {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sand);
+  color: var(--pool-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+.person-name { font-weight: 600; }
+.person-meta { color: var(--dim); font-size: 13px; }
+.search {
+  width: 100%;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 11px 14px;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.search::placeholder { color: var(--mute); }
+
+/* ------------------------------------------------------------ leaderboard */
+.lb-note { font-size: 13px; color: var(--mute); margin: 0 0 14px; }
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.lb-rank {
+  flex: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sand);
+  color: var(--dusk);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+}
+.lb-leader .lb-rank { background: var(--mustard); color: var(--paper); }
+.lb-team { flex: 1; min-width: 0; }
+.lb-team-name { font-weight: 600; }
+.lb-players { color: var(--dim); font-size: 13px; overflow-wrap: anywhere; }
+.lb-score { text-align: right; flex: none; }
+.lb-topar {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--pool-deep);
+}
+.lb-leader .lb-topar { color: var(--mustard); }
+.lb-thru { color: var(--mute); font-size: 12px; }
+
+.lb-rounds { display: flex; gap: 12px; color: var(--dim); font-size: 12px; margin-top: 2px; flex-wrap: wrap; }
+.lb-shootout {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--mustard);
+  border-radius: 999px;
+  padding: 2px 8px;
+  vertical-align: middle;
+}
+
+/* score entry, admin only. One row per team, net score per round. */
+.se-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--edge);
+}
+.se-row:last-child { border-bottom: none; }
+.se-name { flex: 1 1 140px; min-width: 120px; font-weight: 600; }
+.se-input {
+  width: 96px;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------- gallery */
+.upload-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.photo-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--edge); background: var(--paper); }
+.photo-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.photo-bar { display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; }
+.like-btn {
+  border: none; background: none;
+  color: var(--dim);
+  font-size: 14px;
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px;
+}
+.like-btn.liked { color: var(--terra); font-weight: 600; }
+
+/* ------------------------------------------------------------- concierge */
+.con-item { padding: 10px 0; border-bottom: 1px solid var(--edge); }
+.con-item:last-child { border-bottom: none; }
+.con-label { font-weight: 600; }
+.con-detail { color: var(--dim); font-size: 14px; }
+
+/* --------------------------------------------------------------- buttons */
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 18px;
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--pool);
+  color: var(--paper);
+}
+.btn:active { background: var(--pool-deep); }
+.btn-quiet { background: var(--sand); color: var(--ink); border: 1px solid var(--edge); }
+.btn-danger { background: var(--paper); color: var(--danger); border: 1px solid var(--danger); }
+.btn-sm { padding: 7px 12px; font-size: 13px; border-radius: 10px; }
+
+.field {
+  width: 100%;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 11px 14px;
+  color: var(--ink);
+}
+
+/* ----------------------------------------------------------------- admin */
+.admin-badge {
+  background: var(--dusk);
+  color: var(--linen);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.admin-section { margin-bottom: 20px; }
+.admin-h { font-size: 14px; letter-spacing: 0.14em; margin: 0 0 10px; color: var(--dusk); }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--edge); }
+.toggle-row:last-child { border-bottom: none; }
+
+/* modal */
+.scrim {
+  position: fixed; inset: 0;
+  background: rgba(46, 42, 36, 0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+.modal { width: 100%; max-width: 400px; }
+
+/* footer */
+.footer {
+  text-align: center;
+  color: var(--mute);
+  font-size: 12px;
+  padding: 30px 16px 10px;
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+/* =========================================================================
+   THE PARTNERS INVITATIONAL. App logic.
+   Single file, JSX transpiled in the browser. A syntax error here is a
+   white screen, not a build failure. Verify in a browser after every edit.
+   ========================================================================= */
+
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+/* ---------------------------------------------------------- configuration */
+/* Paste the real Firebase web config here (ROADMAP P2.1). While apiKey reads
+   PASTE_ME the app runs in preview mode on an in-memory store. */
+const FIREBASE_CONFIG = {
+  apiKey: "PASTE_ME",
+  authDomain: "PASTE_ME",
+  databaseURL: "PASTE_ME",
+  projectId: "PASTE_ME",
+};
+const PREVIEW = FIREBASE_CONFIG.apiKey === "PASTE_ME";
+
+const LS = {
+  liked: "pinv_liked",
+  admin: "pinv_admin",
+};
+
+const TABS = [
+  { id: "itinerary",   label: "Itinerary" },
+  { id: "field",       label: "The Field" },
+  { id: "leaderboard", label: "Leaderboard" },
+  { id: "gallery",     label: "Gallery" },
+  { id: "concierge",   label: "Concierge" },
+  { id: "resources",   label: "Resources" },
+];
+
+/* ------------------------------------------------------------ store layer */
+/* One API, two backends. Firebase when config is pasted, memory until then.
+   Paths are slash strings, "settings/marquee". subscribe fires immediately
+   with the current value and again on every change. */
+
+function makeMemoryStore(seed) {
+  const data = seed;
+  const subs = []; // { path, cb }
+
+  const get = (path) => path.split("/").reduce(
+    (node, key) => (node == null ? null : node[key]), data);
+
+  /* Subscribers get a clone, never the live object. React compares by
+     reference, and handing back the same mutated object skips the re-render.
+     Firebase snapshots are fresh objects every time, so this mirrors that. */
+  const cloned = (path) => {
+    const v = get(path);
+    return v != null && typeof v === "object" ? JSON.parse(JSON.stringify(v)) : v;
+  };
+
+  const notify = () => subs.forEach((s) => s.cb(cloned(s.path)));
+
+  const setAt = (path, val) => {
+    const keys = path.split("/");
+    const last = keys.pop();
+    let node = data;
+    for (const k of keys) {
+      if (node[k] == null || typeof node[k] !== "object") node[k] = {};
+      node = node[k];
+    }
+    if (val === null) delete node[last];
+    else node[last] = val;
+    notify();
+  };
+
+  return {
+    preview: true,
+    subscribe(path, cb) {
+      const sub = { path, cb };
+      subs.push(sub);
+      cb(cloned(path));
+      return () => subs.splice(subs.indexOf(sub), 1);
+    },
+    set: (path, val) => Promise.resolve(setAt(path, val)),
+    remove: (path) => Promise.resolve(setAt(path, null)),
+    push(path, val) {
+      const id = "m" + Date.now() + Math.random().toString(36).slice(2, 7);
+      setAt(path + "/" + id, val);
+      return Promise.resolve(id);
+    },
+    increment(path, by) {
+      const cur = get(path);
+      return Promise.resolve(setAt(path, (typeof cur === "number" ? cur : 0) + by));
+    },
+  };
+}
+
+function makeFirebaseStore() {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  const db = firebase.database();
+  return {
+    preview: false,
+    subscribe(path, cb) {
+      const ref = db.ref(path);
+      const h = ref.on("value", (snap) => cb(snap.val()));
+      return () => ref.off("value", h);
+    },
+    set: (path, val) => db.ref(path).set(val),
+    remove: (path) => db.ref(path).remove(),
+    push: (path, val) => db.ref(path).push(val).then((r) => r.key),
+    increment: (path, by) =>
+      db.ref(path).transaction((cur) => (typeof cur === "number" ? cur : 0) + by),
+  };
+}
+
+/* Preview seed. Everything here is sample data and says so on screen. */
+const PREVIEW_SEED = {
+  settings: {
+    marquee: "Welcome to the desert. Sample content throughout while the wall is in preview.",
+    adminPin: "0000",
+    tabs: { itinerary: true, field: true, leaderboard: true, gallery: true, concierge: true, resources: true },
+  },
+  teams: {
+    t1: { name: "Sample Team A", players: "Replace via Admin", order: 1, sample: true },
+    t2: { name: "Sample Team B", players: "Replace via Admin", order: 2, sample: true },
+    t3: { name: "Sample Team C", players: "Replace via Admin", order: 3, sample: true },
+    t4: { name: "Sample Team D", players: "Replace via Admin", order: 4, sample: true },
+  },
+  scores: {
+    /* Net round-1 scores. t2 and t3 tie on purpose to exercise shared rank.
+       t4 has no card yet, also on purpose. */
+    t1: { r1: 61.9 },
+    t2: { r1: 63.1 },
+    t3: { r1: 63.1 },
+  },
+  photos: {},
+  photoLikes: {},
+};
+
+const store = PREVIEW ? makeMemoryStore(PREVIEW_SEED) : makeFirebaseStore();
+
+/* ------------------------------------------------------------------ hooks */
+function useNode(path) {
+  const [val, setVal] = useState(undefined);
+  useEffect(() => store.subscribe(path, setVal), [path]);
+  return val;
+}
+
+function useJson(url) {
+  const [val, setVal] = useState(undefined);
+  useEffect(() => {
+    let live = true;
+    fetch(url).then((r) => r.json()).then((j) => live && setVal(j))
+      .catch(() => live && setVal(null));
+    return () => { live = false; };
+  }, [url]);
+  return val;
+}
+
+function lsGet(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
+  catch { return fallback; }
+}
+function lsSet(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+}
+
+/* ------------------------------------------------------------- ornaments */
+function SunDivider() {
+  return (
+    <div className="sunburst" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26">
+        <circle cx="13" cy="13" r="5" fill="currentColor" />
+        {Array.from({ length: 12 }).map((_, i) => {
+          const a = (i * 30 * Math.PI) / 180;
+          return (
+            <line key={i}
+              x1={13 + Math.cos(a) * 8} y1={13 + Math.sin(a) * 8}
+              x2={13 + Math.cos(a) * 12} y2={13 + Math.sin(a) * 12}
+              stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+function Horizon() {
+  return (
+    <svg className="horizon" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,54 L0,38 L140,16 L300,40 L430,10 L590,42 L720,20 L870,44 L1000,26 L1000,54 Z"
+        fill="#55496B" opacity="0.22" />
+      <path d="M0,54 L0,46 L180,28 L360,48 L520,24 L700,50 L850,34 L1000,46 L1000,54 Z"
+        fill="#55496B" opacity="0.38" />
+      <rect x="0" y="52" width="1000" height="2" fill="#2C6B6D" />
+    </svg>
+  );
+}
+
+function PhChip() { return <span className="chip-ph">Placeholder</span>; }
+
+/* --------------------------------------------------------------- masthead */
+function Masthead({ agenda }) {
+  return (
+    <header className="masthead">
+      <div className="breeze masthead-band" aria-hidden="true"></div>
+      <div className="masthead-inner">
+        <div className="t-display masthead-kicker">
+          Century Golf Partners &middot; {agenda?.edition || "18th Annual"}
+        </div>
+        <div className="t-script masthead-script">Welcome to the desert</div>
+        <h1 className="t-display masthead-title">The Partners Invitational</h1>
+        <div className="t-display masthead-venue">
+          PGA WEST &middot; La Quinta, California
+          {agenda && <span> &middot; {agenda.dates}</span>}
+        </div>
+        <img className="masthead-logo" src="assets/brand/pgawest-logo-dusk.png"
+          alt="PGA WEST" />
+      </div>
+      <Horizon />
+    </header>
+  );
+}
+
+/* -------------------------------------------------------------- itinerary */
+function Itinerary() {
+  const agenda = useJson("data/agenda.json");
+  const [dayId, setDayId] = useState(null);
+  if (agenda === undefined) return null;
+  if (!agenda || !agenda.days?.length) {
+    return <div className="empty">The schedule is being finalized. Check back soon.</div>;
+  }
+  const active = agenda.days.find((d) => d.id === dayId) || agenda.days[0];
+  return (
+    <section>
+      <h2 className="t-display page-title">Itinerary</h2>
+      <p className="page-sub">The schedule for your stay.</p>
+      <div className="day-pills">
+        {agenda.days.map((d) => (
+          <button key={d.id}
+            className={"day-pill" + (d.id === active.id ? " active" : "")}
+            onClick={() => setDayId(d.id)}>
+            {d.label}
+          </button>
+        ))}
+      </div>
+      <div className="card roof">
+        <div style={{ color: "var(--dim)", fontSize: 14, marginBottom: 10 }}>
+          {active.date}
+          {active.location && <span> &middot; {active.location}</span>}
+          {active.placeholder && <PhChip />}
+        </div>
+        <div className="stack">
+          {active.sessions.map((s, i) => (
+            <div className="session" key={i}>
+              <div className="session-time">{s.time}</div>
+              <div>
+                <div className="session-title">
+                  {s.title}
+                  {s.spouses && <span style={{ color: "var(--mustard)" }} title="Spouses invited"> &#10035;</span>}
+                  {s.placeholder && <span> <PhChip /></span>}
+                </div>
+                {s.detail && <div className="session-detail">{s.detail}</div>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {agenda.footnote && (
+        <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 12 }}>
+          <span style={{ color: "var(--mustard)" }}>&#10035;</span> {agenda.footnote}
+        </p>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ field */
+function Field() {
+  const roster = useJson("data/roster.json");
+  const [q, setQ] = useState("");
+  if (roster === undefined) return null;
+  const attendees = roster?.attendees || [];
+  const shown = attendees.filter((a) =>
+    (a.name + " " + (a.org || "")).toLowerCase().includes(q.toLowerCase()));
+  const initials = (name) =>
+    name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  return (
+    <section>
+      <h2 className="t-display page-title">The Field</h2>
+      <p className="page-sub">Who is here this week.</p>
+      <input className="search" placeholder="Find a partner" value={q}
+        onChange={(e) => setQ(e.target.value)} />
+      {shown.length === 0 ? (
+        <div className="empty">No matches.</div>
+      ) : (
+        <div className="grid-cards">
+          {shown.map((a) => (
+            <div className="card" key={a.slug}>
+              <div className="person">
+                {a.photo
+                  ? <img className="person-photo" src={a.photo} alt={a.name} />
+                  : <div className="person-mono">{initials(a.name)}</div>}
+                <div>
+                  <div className="person-name">{a.name} {a.placeholder && <PhChip />}</div>
+                  <div className="person-meta">{a.org}</div>
+                  {a.role && <div className="person-meta">{a.role}</div>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------ leaderboard */
+/* Two rounds, net team scores, entered by the scoring table. Standings math
+   lives here and only here. Rank compares score against par for the rounds a
+   team has posted, so a one-round team and a two-round team sit fairly on one
+   board while scoring is underway. Ties (same to-par, same rounds posted)
+   share a rank. A team with nothing posted has no card yet and never outranks
+   a team that has played. */
+function computeStandings(teams, scores, rounds) {
+  const rows = Object.entries(teams || {}).map(([id, t]) => {
+    const s = scores?.[id] || {};
+    let total = 0, par = 0, played = 0;
+    const perRound = rounds.map((r) => {
+      const v = s[r.id];
+      if (typeof v === "number") { total += v; par += r.par; played += 1; return v; }
+      return null;
+    });
+    return { id, ...t, perRound, total, played, toPar: total - par };
+  });
+
+  const posted = rows.filter((r) => r.played > 0)
+    .sort((a, b) => a.toPar - b.toPar || b.played - a.played || a.total - b.total);
+  const waiting = rows.filter((r) => r.played === 0)
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+
+  let prev = null, lastRank = 0;
+  posted.forEach((r, i) => {
+    const key = r.toPar + "|" + r.played;
+    r.rank = key === prev ? lastRank : i + 1;
+    r.tieKey = key;
+    prev = key;
+    lastRank = r.rank;
+  });
+  return { posted, waiting };
+}
+
+/* Handicap nets can carry a decimal. Show one place, drop it when whole. */
+const fmtNum = (n) => (Math.round(n * 10) / 10).toString();
+const fmtToPar = (n) => {
+  const r = Math.round(n * 10) / 10;
+  return r === 0 ? "E" : r > 0 ? "+" + fmtNum(r) : fmtNum(r);
+};
+
+function Leaderboard({ admin }) {
+  const teams = useNode("teams");
+  const scores = useNode("scores");
+  const config = useJson("data/course.json");
+  if (teams === undefined || scores === undefined || config === undefined) return null;
+  const rounds = config?.rounds || [];
+  const { posted, waiting } = computeStandings(teams, scores, rounds);
+  const anyTeams = posted.length + waiting.length > 0;
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Leaderboard</h2>
+      <p className="page-sub">
+        {rounds.map((r, i) => (
+          <span key={r.id}>
+            {r.label}, {r.day.split(",")[0]}: {r.format.toLowerCase()} on the {r.course}.{" "}
+          </span>
+        ))}
+        Net team scores. {config?.shootout}
+        {config?.parPlaceholder && <span> Par values pending the scorecards. <PhChip /></span>}
+      </p>
+      <p className="lb-note">Scores are posted by the scoring table after each round.</p>
+      {!anyTeams ? (
+        <div className="empty">Teams will appear here once pairings are set.</div>
+      ) : (
+        <div className="stack">
+          {posted.map((r) => (
+            <div key={r.id}
+              className={"card lb-row" + (r.rank === 1 ? " lb-leader" : "")}>
+              <div className="lb-rank">{(posted.filter((p) => p.tieKey === r.tieKey).length > 1 ? "T" : "") + r.rank}</div>
+              <div className="lb-team">
+                <div className="lb-team-name">
+                  {r.name} {r.sample && <PhChip />}{" "}
+                  {r.rank <= 3 && <span className="lb-shootout">Shoot-Out</span>}
+                </div>
+                {r.players && <div className="lb-players">{r.players}</div>}
+                <div className="lb-rounds">
+                  {rounds.map((rd, i) => (
+                    <span key={rd.id}>
+                      {rd.label}: {r.perRound[i] == null ? "–" : fmtNum(r.perRound[i])}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="lb-score">
+                <div className="lb-topar">{fmtToPar(r.toPar)}</div>
+                <div className="lb-thru">
+                  {r.played === rounds.length ? "F · " + fmtNum(r.total) : "thru " + r.played + (r.played === 1 ? " round" : " rounds")}
+                </div>
+              </div>
+            </div>
+          ))}
+          {waiting.map((r) => (
+            <div key={r.id} className="card lb-row" style={{ opacity: 0.75 }}>
+              <div className="lb-rank">&ndash;</div>
+              <div className="lb-team">
+                <div className="lb-team-name">{r.name} {r.sample && <PhChip />}</div>
+                {r.players && <div className="lb-players">{r.players}</div>}
+              </div>
+              <div className="lb-score"><div className="lb-thru">No card yet</div></div>
+            </div>
+          ))}
+        </div>
+      )}
+      {admin && <ScoreEntry teams={teams} scores={scores} rounds={rounds} />}
+    </section>
+  );
+}
+
+/* Admin score entry. One row per team, one net score per round, decimals
+   allowed. Save writes, Clear removes. The scoring table owns the math that
+   produces the net number; the wall just posts it. */
+function ScoreRow({ id, team, scores, rounds }) {
+  const current = (rid) => {
+    const v = scores?.[id]?.[rid];
+    return typeof v === "number" ? String(v) : "";
+  };
+  const [draft, setDraft] = useState(() =>
+    Object.fromEntries(rounds.map((r) => [r.id, current(r.id)])));
+  const [dirty, setDirty] = useState(false);
+
+  const save = () => {
+    rounds.forEach((r) => {
+      const raw = draft[r.id].trim();
+      if (raw === "") { store.remove(`scores/${id}/${r.id}`); return; }
+      const n = parseFloat(raw);
+      if (!isNaN(n)) store.set(`scores/${id}/${r.id}`, n);
+    });
+    setDirty(false);
+  };
+
+  return (
+    <div className="se-row">
+      <span className="se-name">{team.name}</span>
+      {rounds.map((r) => (
+        <input key={r.id} className="se-input" type="number" step="0.1"
+          inputMode="decimal" placeholder={r.label}
+          aria-label={team.name + " " + r.label}
+          value={draft[r.id]}
+          onChange={(e) => { setDraft({ ...draft, [r.id]: e.target.value }); setDirty(true); }} />
+      ))}
+      <button className={"btn btn-sm" + (dirty ? "" : " btn-quiet")} onClick={save}>
+        Save
+      </button>
+    </div>
+  );
+}
+
+function ScoreEntry({ teams, scores, rounds }) {
+  const ids = Object.keys(teams || {});
+  if (ids.length === 0 || rounds.length === 0) return null;
+  return (
+    <div className="card roof roof-mustard" style={{ marginTop: 20 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+        <span className="admin-badge">Scoring table</span>
+        <span style={{ fontSize: 13, color: "var(--dim)" }}>
+          Net team score per round. Blank a field and save to clear it.
+        </span>
+      </div>
+      {ids.map((id) => (
+        <ScoreRow key={id} id={id} team={teams[id]} scores={scores} rounds={rounds} />
+      ))}
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------- gallery */
+function compressImage(file, maxDim, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+function Gallery({ admin }) {
+  const photos = useNode("photos");
+  const likes = useNode("photoLikes");
+  const [liked, setLiked] = useState(() => lsGet(LS.liked, {}));
+  const [busy, setBusy] = useState(false);
+  const camRef = useRef();
+  const libRef = useRef();
+  if (photos === undefined) return null;
+
+  const upload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setBusy(true);
+    try {
+      const dataUrl = await compressImage(file, 1000, 0.8);
+      console.log("photo compressed to", Math.round(dataUrl.length * 0.75 / 1024), "KB");
+      await store.push("photos", { dataUrl, ts: Date.now() });
+    } catch (err) {
+      console.error("upload failed", err);
+      alert("That photo did not go through. Try again.");
+    }
+    setBusy(false);
+  };
+
+  const like = (id) => {
+    if (liked[id]) return;
+    const next = { ...liked, [id]: true };
+    setLiked(next);
+    lsSet(LS.liked, next);
+    store.increment(`photoLikes/${id}`, 1);
+  };
+
+  const remove = (id) => {
+    if (!confirm("Remove this photo for everyone?")) return;
+    store.remove(`photos/${id}`);
+    store.remove(`photoLikes/${id}`);
+  };
+
+  const entries = Object.entries(photos || {}).sort((a, b) => b[1].ts - a[1].ts);
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Gallery</h2>
+      <p className="page-sub">Photos from the week, posted by the room.</p>
+      <div className="upload-row">
+        {/* Both paths ship together. Camera capture and library. Hard rule. */}
+        <input ref={camRef} type="file" accept="image/*" capture="environment"
+          style={{ display: "none" }} onChange={upload} />
+        <input ref={libRef} type="file" accept="image/*"
+          style={{ display: "none" }} onChange={upload} />
+        <button className="btn" disabled={busy} onClick={() => camRef.current.click()}>
+          {busy ? "Posting…" : "Take a photo"}
+        </button>
+        <button className="btn btn-quiet" disabled={busy} onClick={() => libRef.current.click()}>
+          Choose from library
+        </button>
+      </div>
+      {entries.length === 0 ? (
+        <div className="empty">No photos yet. Be the first.</div>
+      ) : (
+        <div className="photo-grid">
+          {entries.map(([id, p]) => (
+            <div className="photo-card" key={id}>
+              <img src={p.dataUrl} alt="Event photo" loading="lazy" />
+              <div className="photo-bar">
+                <button className={"like-btn" + (liked[id] ? " liked" : "")}
+                  onClick={() => like(id)}>
+                  {liked[id] ? "♥" : "♡"} {likes?.[id] || 0}
+                </button>
+                {admin && (
+                  <button className="btn btn-danger btn-sm" onClick={() => remove(id)}>
+                    Remove
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- concierge */
+function Concierge() {
+  const data = useJson("data/concierge.json");
+  if (data === undefined) return null;
+  return (
+    <section>
+      <h2 className="t-display page-title">Concierge</h2>
+      <p className="page-sub">Everything you need to get here and get around.</p>
+      <div className="stack">
+        {(data?.sections || []).map((sec) => (
+          <div className="card roof" key={sec.id}>
+            <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
+              {sec.title} {sec.placeholder && <PhChip />}
+            </h3>
+            {sec.logo && <img className="con-logo" src={sec.logo} alt="" />}
+            {sec.items.map((item, i) => (
+              <div className="con-item" key={i}>
+                <div className="con-label">{item.label} {item.placeholder && <PhChip />}</div>
+                {item.detail && <div className="con-detail">{item.detail}</div>}
+                {(item.phone || item.url) && (
+                  <div style={{ fontSize: 14, marginTop: 4, display: "flex", gap: 14, flexWrap: "wrap" }}>
+                    {item.phone && <a href={"tel:" + item.phone.replace(/[^0-9+]/g, "")}>{item.phone}</a>}
+                    {item.url && <a href={item.url} target="_blank" rel="noopener">{item.url.replace(/^https?:\/\/(www\.)?/, "")}</a>}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- resources */
+function Resources() {
+  const data = useJson("data/resources.json");
+  if (data === undefined) return null;
+  const items = data?.resources || [];
+  return (
+    <section>
+      <h2 className="t-display page-title">Resources</h2>
+      <p className="page-sub">Documents and links worth keeping.</p>
+      {items.length === 0 ? (
+        <div className="empty">Nothing here yet.</div>
+      ) : (
+        <div className="stack">
+          {items.map((r, i) => (
+            <div className="card" key={i}>
+              <div className="con-label">
+                {r.url ? <a href={r.url} target="_blank" rel="noopener">{r.title}</a> : r.title}
+                {" "}{r.placeholder && <PhChip />}
+              </div>
+              {r.detail && <div className="con-detail">{r.detail}</div>}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ admin */
+function PinGate({ onPass, onClose }) {
+  const [pin, setPin] = useState("");
+  const [bad, setBad] = useState(false);
+  const savedPin = useNode("settings/adminPin");
+  const check = () => {
+    if (pin && pin === String(savedPin)) onPass();
+    else setBad(true);
+  };
+  return (
+    <div className="scrim" onClick={onClose}>
+      <div className="card roof roof-terra modal" onClick={(e) => e.stopPropagation()}>
+        <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", marginTop: 0 }}>
+          Event staff
+        </h3>
+        <input className="field" type="password" inputMode="numeric"
+          placeholder="PIN" value={pin} autoFocus
+          onChange={(e) => { setPin(e.target.value); setBad(false); }}
+          onKeyDown={(e) => e.key === "Enter" && check()} />
+        {bad && <div style={{ color: "var(--danger)", fontSize: 13, marginTop: 8 }}>
+          That PIN did not match.
+        </div>}
+        <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+          <button className="btn" onClick={check}>Enter</button>
+          <button className="btn btn-quiet" onClick={onClose}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdminPanel({ onExit }) {
+  const settings = useNode("settings");
+  const teams = useNode("teams");
+  const [marquee, setMarquee] = useState(null);
+  const [newTeam, setNewTeam] = useState("");
+  const [newPlayers, setNewPlayers] = useState("");
+  if (settings === undefined || teams === undefined) return null;
+
+  const tabVis = settings?.tabs || {};
+  const marqueeVal = marquee ?? settings?.marquee ?? "";
+
+  const addTeam = () => {
+    const name = newTeam.trim();
+    if (!name) return;
+    const order = Object.keys(teams || {}).length + 1;
+    store.push("teams", { name, players: newPlayers.trim(), order });
+    setNewTeam(""); setNewPlayers("");
+  };
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Admin</h2>
+      <p className="page-sub">
+        Staff controls. Score entry lives on the Leaderboard tab while you are
+        signed in.
+      </p>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Marquee</h3>
+        <input className="field" value={marqueeVal}
+          onChange={(e) => setMarquee(e.target.value)} />
+        <button className="btn btn-sm" style={{ marginTop: 10 }}
+          onClick={() => { store.set("settings/marquee", marqueeVal); setMarquee(null); }}>
+          Publish
+        </button>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Teams</h3>
+        {Object.entries(teams || {}).map(([id, t]) => (
+          <div className="toggle-row" key={id}>
+            <div>
+              <div style={{ fontWeight: 600 }}>{t.name} {t.sample && <PhChip />}</div>
+              {t.players && <div style={{ fontSize: 13, color: "var(--dim)" }}>{t.players}</div>}
+            </div>
+            <button className="btn btn-danger btn-sm" onClick={() => {
+              if (confirm(`Remove ${t.name} and its scores?`)) {
+                store.remove(`teams/${id}`);
+                store.remove(`scores/${id}`);
+              }
+            }}>Remove</button>
+          </div>
+        ))}
+        <div style={{ display: "grid", gap: 8, marginTop: 12 }}>
+          <input className="field" placeholder="Team name" value={newTeam}
+            onChange={(e) => setNewTeam(e.target.value)} />
+          <input className="field" placeholder="Players (optional)" value={newPlayers}
+            onChange={(e) => setNewPlayers(e.target.value)} />
+          <button className="btn btn-sm" onClick={addTeam}>Add team</button>
+        </div>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Tabs</h3>
+        {TABS.map((t) => (
+          <div className="toggle-row" key={t.id}>
+            <span>{t.label}</span>
+            <button className={"btn btn-sm" + (tabVis[t.id] !== false ? "" : " btn-quiet")}
+              onClick={() => store.set(`settings/tabs/${t.id}`, tabVis[t.id] === false)}>
+              {tabVis[t.id] !== false ? "Visible" : "Hidden"}
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button className="btn btn-quiet" onClick={onExit}>Sign out of admin</button>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------- app */
+function App() {
+  const [tab, setTab] = useState("itinerary");
+  const [admin, setAdmin] = useState(() => lsGet(LS.admin, false));
+  const [gate, setGate] = useState(false);
+  const settings = useNode("settings");
+  const agenda = useJson("data/agenda.json");
+
+  const tabVis = settings?.tabs || {};
+  const visibleTabs = TABS.filter((t) => admin || tabVis[t.id] !== false);
+
+  useEffect(() => {
+    if (tab !== "admin" && !visibleTabs.some((t) => t.id === tab) && visibleTabs[0]) {
+      setTab(visibleTabs[0].id);
+    }
+  }, [tab, visibleTabs.map((t) => t.id).join(",")]);
+
+  const enterAdmin = () => { setAdmin(true); lsSet(LS.admin, true); setGate(false); setTab("admin"); };
+  const exitAdmin = () => { setAdmin(false); lsSet(LS.admin, false); setTab("itinerary"); };
+
+  return (
+    <React.Fragment>
+      {PREVIEW && (
+        <div className="preview-banner">
+          Preview mode. Firebase is not wired yet, so nothing here saves. Sample data is marked.
+        </div>
+      )}
+      {settings?.marquee && <div className="marquee">{settings.marquee}</div>}
+
+      <Masthead agenda={agenda} />
+
+      <nav className="nav" aria-label="Sections">
+        <div className="nav-row">
+          {visibleTabs.map((t) => (
+            <button key={t.id}
+              className={"nav-pill" + (tab === t.id ? " active" : "")}
+              onClick={() => setTab(t.id)}>
+              {t.label}
+            </button>
+          ))}
+          <button className={"nav-pill nav-gear" + (tab === "admin" ? " active" : "")}
+            aria-label="Event staff"
+            onClick={() => (admin ? setTab("admin") : setGate(true))}>
+            &#9881;
+          </button>
+        </div>
+      </nav>
+
+      <main className="shell">
+        {tab === "itinerary" && <Itinerary />}
+        {tab === "field" && <Field />}
+        {tab === "leaderboard" && <Leaderboard admin={admin} />}
+        {tab === "gallery" && <Gallery admin={admin} />}
+        {tab === "concierge" && <Concierge />}
+        {tab === "resources" && <Resources />}
+        {tab === "admin" && admin && <AdminPanel onExit={exitAdmin} />}
+        <SunDivider />
+        <footer className="footer">
+          The Partners Invitational &middot; Century Golf Partners
+        </footer>
+      </main>
+
+      {gate && <PinGate onPass={enterAdmin} onClose={() => setGate(false)} />}
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "_note": "Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. Who to Call is still placeholder pending Team Captain Host names (ROADMAP P1.6).",
+  "sections": [
+    {
+      "id": "venue",
+      "title": "The Club",
+      "logo": "assets/brand/pgawest-logo.png",
+      "items": [
+        { "label": "PGA WEST Private Clubhouse", "detail": "55-955 PGA Blvd., La Quinta, California 92253. Home base for the week: registration, breakfast, scoring, and the evening events.", "phone": "(760) 564-7111", "url": "https://www.pgawest.com" },
+        { "label": "La Quinta Cliffhouse", "detail": "78250 Highway 111, La Quinta, California 92253. Monday's teams dinner." }
+      ]
+    },
+    {
+      "id": "dress",
+      "title": "What to Wear",
+      "items": [
+        { "label": "PGA WEST", "detail": "Country club casual. Summer attire is appropriate. No denim. Jackets are not required at social events." },
+        { "label": "Sunday opening party", "detail": "Light the Night in White. White attire, no denim." },
+        { "label": "La Quinta Cliffhouse", "detail": "Smart or elegant casual. Denim is allowed here." }
+      ]
+    },
+    {
+      "id": "stay",
+      "title": "Where You're Staying",
+      "logo": "assets/brand/laquinta-logo.png",
+      "items": [
+        { "label": "La Quinta Resort & Club", "detail": "A Waldorf Astoria Resort. 49-499 Eisenhower Drive, La Quinta, California 92253. Championship golf, resort pool, and a full-service spa.", "phone": "(760) 564-4111", "url": "https://www.laquintaresort.com" },
+        { "label": "Extending your stay", "detail": "Tell your Team Captain Host. The resort will contact you directly to confirm availability and rates." }
+      ]
+    },
+    {
+      "id": "travel",
+      "title": "Getting Here",
+      "items": [
+        { "label": "Flights", "detail": "Your Team Captain Host books the team's airfare from your completed Player Profile Sheet. Booking your own trip around the event? The club credits your member account up to the average team ticket price. Spouse airfare is booked and paid separately." },
+        { "label": "Ground transport", "detail": "Each team has rental vehicles for the airport, the course, and the resort. Please plan designated drivers." },
+        { "label": "Baggage", "detail": "Pay your own baggage fees and keep the receipts. They come back as a credit on your member account. Golf clubs count as baggage." },
+        { "label": "Driving yourself", "detail": "Local members who skip the team vehicles are reimbursed mileage or a fixed amount." }
+      ]
+    },
+    {
+      "id": "spouses",
+      "title": "Spouses and Guests",
+      "items": [
+        { "label": "Invited and encouraged", "detail": "The fee is $550, billed to your member statement, and non-refundable after September 15. Adults only. No children or pets." }
+      ]
+    },
+    {
+      "id": "extras",
+      "title": "Extra Golf",
+      "items": [
+        { "label": "Practice and spouse rounds", "detail": "Your Team Captain Host can schedule additional tee times at Palmer Advantage rates, $35 to $50 depending on the course." }
+      ]
+    },
+    {
+      "id": "contacts",
+      "title": "Who to Call",
+      "placeholder": true,
+      "items": [
+        { "label": "Your Team Captain Host", "detail": "Names and numbers to come.", "placeholder": true }
+      ]
+    }
+  ]
+}

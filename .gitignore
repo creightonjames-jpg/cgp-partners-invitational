@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+confidential/
+incoming/
+*.log
+
+# Internal source documents. The agenda docx is a working file with the
+# partner letter template in it. Keep it local, not on the public Pages site.
+docs/
