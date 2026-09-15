@@ -97,7 +97,8 @@ membership wall does not travel here.
 **Stack**
 - React 18 via CDN, single `index.html`, inline Babel transpilation
 - Firebase Realtime Database for live state (NOT YET WIRED, see ROADMAP P2)
-- GitHub Pages from repo root (repo not yet created)
+- GitHub Pages from repo root, live at
+  https://creightonjames-jpg.github.io/cgp-partners-invitational/
 - Google Fonts: Josefin Sans, Yellowtail, Inter
 - Until Firebase is wired, the app runs in preview mode on an in-memory store
   with clearly labeled sample data. `FIREBASE_CONFIG` in index.html is the
@@ -115,6 +116,21 @@ membership wall does not travel here.
 /assets/brand/                    logo, favicons, textures
 /serve.js                         local static server, node serve.js, port 4179
 ```
+
+**Publishing.** `git` does not run on this Mac: the Xcode license has not been
+accepted, so `/usr/bin/git` and `/usr/bin/python3` both refuse with a license
+error, and only Jim can clear it (`sudo xcodebuild -license`, needs his
+password). Until then, publish through the GitHub API instead:
+
+```
+node tools/publish.js "commit message"
+```
+
+It reads every file except `docs/`, writes blobs, builds one tree, commits,
+moves `main`, and turns Pages on if it is off. `gh` is already authenticated as
+creightonjames-jpg. The tree is built WITHOUT `base_tree`, so a file deleted
+locally is deleted upstream too. Never put secrets in this repo: it is public,
+like every other CGP wall repo.
 
 **The data split.** Anything created during the event goes in Firebase.
 Anything fixed before the event lives in the repo as a static file.

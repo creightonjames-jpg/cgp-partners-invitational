@@ -63,8 +63,11 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
 - [ ] **P2.1 Firebase project.** Jim creates it, paste config into
       FIREBASE_CONFIG, publish permanent rules and READ THEM BACK. Accept:
       preview banner gone, writes visible from a second device.
-- [ ] **P2.2 GitHub repo and Pages.** Repo cgp-partners-invitational, Pages
-      from root. Accept: public URL loads on a phone on cellular.
+- [x] **P2.2 GitHub repo and Pages.** Done Sep 15. Public repo
+      creightonjames-jpg/cgp-partners-invitational, Pages from main root, live
+      at https://creightonjames-jpg.github.io/cgp-partners-invitational/.
+      NOTE: git CLI is broken on this Mac (Xcode license), so publishing runs
+      through the GitHub API. See "Publishing" in CLAUDE.md.
 - [ ] **P2.3 QR code.** Generate, place in assets/brand/, hand to organizers.
       Accept: QR resolves on an iPhone camera from a printed page.
 - [ ] **P2.4 PWA dressing.** manifest.webmanifest, icons, theme color. Accept:
