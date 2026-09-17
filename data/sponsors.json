@@ -12,7 +12,7 @@
           "club": "Balcones Country Club",
           "count": 7,
           "tier": "Platinum",
-          "photo": "assets/sponsors/trey-showalter.jpg"
+          "photo": null
         },
         {
           "slug": "todd-and-jamie-spitzer",
@@ -20,7 +20,7 @@
           "club": "Monterey Country Club",
           "count": 6,
           "tier": "Platinum",
-          "photo": "assets/sponsors/todd-and-jamie-spitzer.jpg"
+          "photo": null
         },
         {
           "slug": "jenny-tronson",
@@ -28,7 +28,7 @@
           "club": "Canyon Oaks Country Club",
           "count": 5,
           "tier": "Platinum",
-          "photo": "assets/sponsors/jenny-tronson.jpg"
+          "photo": null
         },
         {
           "slug": "kim-and-deanne-ashmore",
@@ -36,7 +36,7 @@
           "club": "Valor Club",
           "count": 5,
           "tier": "Platinum",
-          "photo": "assets/sponsors/kim-and-deanne-ashmore.jpg"
+          "photo": null
         },
         {
           "slug": "rick-mclimore",
@@ -44,7 +44,7 @@
           "club": "Marbella Country Club",
           "count": 5,
           "tier": "Platinum",
-          "photo": "assets/sponsors/rick-mclimore.jpg"
+          "photo": null
         }
       ]
     },
@@ -57,7 +57,7 @@
           "club": "Canyon Oaks Country Club",
           "count": 4.5,
           "tier": "Gold",
-          "photo": "assets/sponsors/ben-raymond.jpg"
+          "photo": null
         },
         {
           "slug": "hyung-and-suzie-cho",
@@ -65,7 +65,7 @@
           "club": "Wood Ranch Golf Club",
           "count": 4.5,
           "tier": "Gold",
-          "photo": "assets/sponsors/hyung-and-suzie-cho.jpg"
+          "photo": null
         },
         {
           "slug": "blake-and-rochelle-sherman",
@@ -73,7 +73,7 @@
           "club": "The Club at Prescott Lakes",
           "count": 4,
           "tier": "Gold",
-          "photo": "assets/sponsors/blake-and-rochelle-sherman.jpg"
+          "photo": null
         },
         {
           "slug": "jeff-blumer-and-kristy-kneiding",
@@ -81,7 +81,7 @@
           "club": "Monterey Country Club",
           "count": 4,
           "tier": "Gold",
-          "photo": "assets/sponsors/jeff-blumer-and-kristy-kneiding.jpg"
+          "photo": null
         },
         {
           "slug": "jordan-and-cynthia-gugino",
@@ -89,7 +89,7 @@
           "club": "PGA WEST",
           "count": 4,
           "tier": "Gold",
-          "photo": "assets/sponsors/jordan-and-cynthia-gugino.jpg"
+          "photo": null
         },
         {
           "slug": "justin-and-kylie-connelly",
@@ -97,7 +97,7 @@
           "club": "Eagle's Landing Country Club",
           "count": 4,
           "tier": "Gold",
-          "photo": "assets/sponsors/justin-and-kylie-connelly.jpg"
+          "photo": null
         }
       ]
     }

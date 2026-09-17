@@ -404,6 +404,51 @@ a { color: var(--pool-deep); }
   color: var(--ink);
 }
 
+/* ---------------------------------------------------------------- cropper */
+.crop-modal { max-width: 340px; }
+.crop-title { font-size: 14px; letter-spacing: 0.14em; margin: 0 0 12px; }
+.crop-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--sand);
+  touch-action: none;          /* the drag is ours, not the browser's scroll */
+  cursor: grab;
+  user-select: none;
+}
+.crop-frame:active { cursor: grabbing; }
+.crop-img {
+  position: absolute;
+  top: 0; left: 0;
+  max-width: none;             /* the global img rule would fight the zoom */
+  will-change: transform;
+  pointer-events: none;
+}
+/* Circular mask preview for a round destination, drawn as a ring overlay so
+   the corners stay visible while positioning. */
+.crop-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  box-shadow: 0 0 0 9999px rgba(247, 242, 232, 0.55) inset;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent 49.5%, #000 50%);
+  mask: radial-gradient(circle at 50% 50%, transparent 49.5%, #000 50%);
+}
+.crop-zoom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--dim);
+}
+.crop-zoom input { flex: 1; accent-color: var(--pool); }
+.crop-hint { font-size: 12px; color: var(--mute); margin: 6px 0 0; text-align: center; }
+.crop-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
 /* --------------------------------------------------------------- gallery */
 .upload-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
@@ -1001,6 +1046,7 @@ function Teams() {
 function SponsorCard({ s, uploaded, admin }) {
   const [broken, setBroken] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState(null);
   const fileRef = useRef();
 
   const src = uploaded || (broken ? null : s.photo);
@@ -1010,14 +1056,18 @@ function SponsorCard({ s, uploaded, admin }) {
     ? (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase()
     : "";
 
-  const upload = async (e) => {
+  const pick = (e) => {
     const file = e.target.files?.[0];
     e.target.value = "";
-    if (!file) return;
+    if (file) setPending(file);
+  };
+
+  const save = async (dataUrl) => {
+    setPending(null);
     setBusy(true);
     try {
-      const dataUrl = await compressImage(file, 800, 0.82);
       await store.set(`sponsorPhotos/${s.slug}`, dataUrl);
+      setBroken(false);
     } catch (err) {
       console.error("sponsor photo failed", err);
       alert("That photo did not go through. Try again.");
@@ -1041,7 +1091,7 @@ function SponsorCard({ s, uploaded, admin }) {
       {admin && (
         <div className="sponsor-admin">
           <input ref={fileRef} type="file" accept="image/*"
-            style={{ display: "none" }} onChange={upload} />
+            style={{ display: "none" }} onChange={pick} />
           <button className="btn btn-quiet btn-sm" disabled={busy}
             onClick={() => fileRef.current.click()}>
             {busy ? "Uploading…" : uploaded ? "Replace photo" : "Upload photo"}
@@ -1055,6 +1105,10 @@ function SponsorCard({ s, uploaded, admin }) {
               }}>Remove</button>
           )}
         </div>
+      )}
+      {pending && (
+        <PhotoCropper file={pending} aspect={1} maxOut={800} round
+          onCancel={() => setPending(null)} onDone={save} />
       )}
     </div>
   );
@@ -1299,23 +1353,150 @@ function compressImage(file, maxDim, quality) {
   });
 }
 
+/* ---------------------------------------------------------------- cropper */
+/* Drag to move, slider to zoom, then export. No library: an event wall that
+   depends on a CDN cropper is an event wall that breaks when the venue wifi
+   blocks that CDN. Viewport maths: the image is scaled to cover the frame at
+   zoom 1, and the offset is clamped so it can never uncover an edge. */
+function PhotoCropper({ file, aspect = 1, maxOut = 800, round = false,
+                        allowSkip = false, onCancel, onDone }) {
+  const [img, setImg] = useState(null);
+  const [zoom, setZoom] = useState(1);
+  const [off, setOff] = useState({ x: 0, y: 0 });
+  const [busy, setBusy] = useState(false);
+  const frameRef = useRef();
+  const drag = useRef(null);
+
+  /* Frame is sized in CSS; read it back so the maths matches what is drawn. */
+  const [frame, setFrame] = useState({ w: 260, h: 260 });
+
+  /* Hold the object URL for the life of the modal. Revoking it on load kills
+     the <img> that draws the preview, which shows as a broken image. */
+  useEffect(() => {
+    const url = URL.createObjectURL(file);
+    const i = new Image();
+    i.onload = () => setImg(i);
+    i.onerror = () => onCancel();
+    i.src = url;
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
+  useEffect(() => {
+    if (!frameRef.current) return;
+    const r = frameRef.current.getBoundingClientRect();
+    setFrame({ w: r.width, h: r.height });
+  }, [img]);
+
+  if (!img) {
+    return (
+      <div className="scrim">
+        <div className="card modal" style={{ textAlign: "center" }}>Loading the photo…</div>
+      </div>
+    );
+  }
+
+  const base = Math.max(frame.w / img.width, frame.h / img.height);
+  const scale = base * zoom;
+  const dispW = img.width * scale;
+  const dispH = img.height * scale;
+
+  const clamp = (o) => ({
+    x: Math.min(0, Math.max(frame.w - dispW, o.x)),
+    y: Math.min(0, Math.max(frame.h - dispH, o.y)),
+  });
+
+  /* Re-clamp whenever zoom changes, so zooming out never leaves a gap. */
+  const shown = clamp(off);
+
+  const onDown = (e) => {
+    drag.current = { x: e.clientX - shown.x, y: e.clientY - shown.y };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onMove = (e) => {
+    if (!drag.current) return;
+    setOff(clamp({ x: e.clientX - drag.current.x, y: e.clientY - drag.current.y }));
+  };
+  const onUp = (e) => {
+    drag.current = null;
+    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
+  };
+
+  const exportCrop = () => {
+    setBusy(true);
+    const outW = maxOut;
+    const outH = Math.round(maxOut / aspect);
+    const ratio = outW / frame.w;
+    const canvas = document.createElement("canvas");
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#FFFDF6";
+    ctx.fillRect(0, 0, outW, outH);
+    ctx.drawImage(img, shown.x * ratio, shown.y * ratio, dispW * ratio, dispH * ratio);
+    onDone(canvas.toDataURL("image/jpeg", 0.85));
+  };
+
+  const skip = async () => {
+    setBusy(true);
+    onDone(await compressImage(file, 1000, 0.8));
+  };
+
+  return (
+    <div className="scrim" onClick={onCancel}>
+      <div className="card modal crop-modal" onClick={(e) => e.stopPropagation()}>
+        <h3 className="t-display crop-title">Position the photo</h3>
+        <div ref={frameRef}
+          className={"crop-frame" + (round ? " crop-round" : "")}
+          style={{ aspectRatio: String(aspect) }}
+          onPointerDown={onDown} onPointerMove={onMove}
+          onPointerUp={onUp} onPointerCancel={onUp}>
+          <img className="crop-img" src={img.src} alt=""
+            draggable="false"
+            style={{ width: dispW + "px", height: dispH + "px",
+                     transform: `translate(${shown.x}px, ${shown.y}px)` }} />
+          {round && <div className="crop-ring" />}
+        </div>
+        <label className="crop-zoom">
+          <span>Zoom</span>
+          <input type="range" min="1" max="4" step="0.01" value={zoom}
+            onChange={(e) => setZoom(parseFloat(e.target.value))} />
+        </label>
+        <p className="crop-hint">Drag the photo to move it.</p>
+        <div className="crop-actions">
+          <button className="btn" disabled={busy} onClick={exportCrop}>Use this crop</button>
+          {allowSkip && (
+            <button className="btn btn-quiet" disabled={busy} onClick={skip}>
+              Use the whole photo
+            </button>
+          )}
+          <button className="btn btn-quiet" disabled={busy} onClick={onCancel}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Gallery({ admin }) {
   const photos = useNode("photos");
   const likes = useNode("photoLikes");
   const [liked, setLiked] = useState(() => lsGet(LS.liked, {}));
   const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState(null);
   const camRef = useRef();
   const libRef = useRef();
   if (photos === undefined) return null;
 
-  const upload = async (e) => {
+  const pick = (e) => {
     const file = e.target.files?.[0];
     e.target.value = "";
-    if (!file) return;
+    if (file) setPending(file);
+  };
+
+  const post = async (dataUrl) => {
+    setPending(null);
     setBusy(true);
     try {
-      const dataUrl = await compressImage(file, 1000, 0.8);
-      console.log("photo compressed to", Math.round(dataUrl.length * 0.75 / 1024), "KB");
+      console.log("photo posted at", Math.round(dataUrl.length * 0.75 / 1024), "KB");
       await store.push("photos", { dataUrl, ts: Date.now() });
     } catch (err) {
       console.error("upload failed", err);
@@ -1347,9 +1528,9 @@ function Gallery({ admin }) {
       <div className="upload-row">
         {/* Both paths ship together. Camera capture and library. Hard rule. */}
         <input ref={camRef} type="file" accept="image/*" capture="environment"
-          style={{ display: "none" }} onChange={upload} />
+          style={{ display: "none" }} onChange={pick} />
         <input ref={libRef} type="file" accept="image/*"
-          style={{ display: "none" }} onChange={upload} />
+          style={{ display: "none" }} onChange={pick} />
         <button className="btn" disabled={busy} onClick={() => camRef.current.click()}>
           {busy ? "Posting…" : "Take a photo"}
         </button>
@@ -1378,6 +1559,10 @@ function Gallery({ admin }) {
             </div>
           ))}
         </div>
+      )}
+      {pending && (
+        <PhotoCropper file={pending} aspect={1} maxOut={1000} allowSkip
+          onCancel={() => setPending(null)} onDone={post} />
       )}
     </section>
   );

@@ -150,15 +150,22 @@ for (const r of sponsorRows) {
   const name = clean(r[5]) || fixName(r[1], r[2]);
   const count = num(r[6]);
   if (!name || count < TOP_SPONSOR_MIN) continue;
+  const slug = slugify(name);
+  /* Only point at a photo that exists. A path to a missing file is a 404 in
+     every attendee's console and a wasted request on venue wifi. Drop a
+     headshot in assets/sponsors/ named for the slug and rerun this script.
+     Organizers can also upload from the wall, which lands in Firebase and
+     wins over the file. */
+  const photo = ["jpg", "jpeg", "png", "webp"]
+    .map((ext) => `assets/sponsors/${slug}.${ext}`)
+    .find((rel) => fs.existsSync(path.join(REPO, rel))) || null;
   picked.push({
-    slug: slugify(name),
+    slug,
     name,
     club: clean(r[0]),
     count,
     tier: count >= PLATINUM_MIN ? "Platinum" : "Gold",
-    /* Drop a headshot at this path and it appears. Organizers can also upload
-       one from the wall, which lands in Firebase and wins over the file. */
-    photo: `assets/sponsors/${slugify(name)}.jpg`,
+    photo,
   });
 }
 picked.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
@@ -181,6 +188,11 @@ console.log("teams:", teams.length, "clubs");
 console.log("  with captain:", teams.filter((t) => t.captain).length);
 console.log("  players:", teams.reduce((n, t) => n + t.players.length, 0));
 tiers.forEach((t) => console.log(`${t.tier}: ${t.sponsors.length}`));
+const missing = picked.filter((s) => !s.photo);
+if (missing.length) {
+  console.log(`\nno photo yet for ${missing.length} of ${picked.length} sponsors:`);
+  missing.forEach((s) => console.log(`  assets/sponsors/${s.slug}.jpg  (${s.name})`));
+}
 if (warnings.length) {
   console.log("\nWARNINGS");
   warnings.forEach((w) => console.log("  ! " + w));

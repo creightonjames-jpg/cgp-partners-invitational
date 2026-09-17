@@ -52,6 +52,18 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       scoring. Code kept with revival instructions, pending Jim's call on
       deleting it.
 
+## Phase 0c. Admin and photos (Sep 17)
+
+- [x] **P0c.1 Photo cropper.** Dependency-free pan and zoom, square output.
+      Wired into sponsor photos (round, 800px) and gallery photos (1000px,
+      with a skip). Accept: crop applied from a wide source image lands on the
+      card exactly as positioned. Verified.
+- [x] **P0c.2 Sponsor photo upload.** Admin-only, stored at
+      `sponsorPhotos/{slug}`, overrides the static file, removable.
+- [x] **P0c.3 Sponsor photo files.** build-roster.js only references a photo
+      that exists, so missing headshots cost nothing. Drop files in
+      assets/sponsors/ named for the slug and rerun the script.
+
 ## Phase 1. Content intake
 
 - [x] **P1.1 Event dates and agenda.** Done Sep 14 from the final agenda doc

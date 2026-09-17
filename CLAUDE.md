@@ -145,11 +145,26 @@ Anything fixed before the event lives in the repo as a static file.
 | Per device like history, admin session | Local storage, `pinv_` prefix |
 | Videos | YouTube or Vimeo unlisted embeds, never repo files |
 
-**Firebase nodes:** `settings/`, `questions/`, `photos/`, `photoLikes/`.
+**Firebase nodes:** `settings/`, `questions/`, `photos/`, `photoLikes/`,
+`sponsorPhotos/{slug}`.
 `teams/` and `scores/` belong to the parked leaderboard and are no longer
 seeded or written.
 
 **Local storage keys:** `pinv_liked`, `pinv_admin`, `pinv_asked`
+
+**Admin login.** The gear at the right end of the tab strip. The PIN lives at
+`settings/adminPin` in Firebase, so it is changed there, not in code. In
+preview mode the seeded PIN is 0000. **When Firebase goes live, set a real PIN
+before the QR code goes out.** If `settings/adminPin` is missing entirely no
+PIN will work, which fails closed rather than open. Admin unlocks: sponsor
+photo upload, question answering, marquee, tab visibility, photo removal.
+
+**Photo cropping.** `PhotoCropper` is a local component, no library, because a
+CDN cropper is one more thing that can be blocked by venue wifi. Drag to pan,
+slider to zoom, square output. Sponsor photos crop round at 800px and are
+required; gallery photos crop at 1000px and offer "Use the whole photo".
+Object URLs live for the life of the modal. Revoking one on load blanks the
+preview, which is how it broke the first time.
 
 ---
 
