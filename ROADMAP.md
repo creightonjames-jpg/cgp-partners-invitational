@@ -98,12 +98,11 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
 
 ## Phase 2. Go live
 
-- [ ] **P2.1 Firebase project. NOW THE CRITICAL PATH.** Jim creates it, paste
-      config into FIREBASE_CONFIG, publish permanent rules and READ THEM BACK.
-      Two of the seven tabs (Photos, Questions) do nothing across devices
-      without it, and Questions is a live feature Donny asked for. Accept:
-      preview banner gone, a question asked on one phone is answerable on
-      another.
+- [x] **P2.1 Firebase. DONE Sep 17.** Own RTDB instance
+      cgp-partners-inv-2026 inside the cgp-membership-wall-2026 project, since
+      the Google account is at its project quota. Permanent open rules
+      deployed and read back. Settings seeded. Verified live: a sponsor photo
+      uploaded on the published URL survived a full reload.
 - [x] **P2.2 GitHub repo and Pages.** Done Sep 15. Public repo
       creightonjames-jpg/cgp-partners-invitational, Pages from main root, live
       at https://creightonjames-jpg.github.io/cgp-partners-invitational/.

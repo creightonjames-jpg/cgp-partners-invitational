@@ -96,13 +96,36 @@ membership wall does not travel here.
 
 **Stack**
 - React 18 via CDN, single `index.html`, inline Babel transpilation
-- Firebase Realtime Database for live state (NOT YET WIRED, see ROADMAP P2)
+- Firebase Realtime Database, LIVE since Sep 17
 - GitHub Pages from repo root, live at
   https://creightonjames-jpg.github.io/cgp-partners-invitational/
 - Google Fonts: Josefin Sans, Yellowtail, Inter
-- Until Firebase is wired, the app runs in preview mode on an in-memory store
-  with clearly labeled sample data. `FIREBASE_CONFIG` in index.html is the
-  switch: paste real config and preview mode turns itself off.
+- `FIREBASE_CONFIG` in index.html is the switch. Setting apiKey back to
+  PASTE_ME drops the app into the in-memory preview store, which is useful
+  for testing without writing to the live event data.
+
+**Which database.** The wall uses its own Realtime Database instance,
+`cgp-partners-inv-2026`, reached at
+https://cgp-partners-inv-2026.firebaseio.com. That instance lives inside the
+`cgp-membership-wall-2026` Firebase project, NOT because the two events share
+data but because Jim's Google account has hit its Cloud project quota and a
+new project could not be created. A separate instance means separate data and
+separate rules. Nothing in this wall can read or write the membership wall's
+database. If the quota is ever freed, moving to a dedicated project is a one
+line change to `databaseURL` plus a rules deploy.
+
+**Deploying rules.** `firebase.json` uses the ARRAY form of the database key.
+The object form silently ignores `instance` and deploys to the project's
+default database, which is the membership wall's. That happened once on
+Sep 17. It did no harm because both use the same open rules, but check the
+deploy output names `cgp-partners-inv-2026` before believing it.
+
+```
+firebase deploy --only database --project cgp-membership-wall-2026
+firebase database:get "/.settings/rules" --instance cgp-partners-inv-2026 --project cgp-membership-wall-2026
+```
+
+The second command is not optional. Read the rules back every time.
 
 **File layout**
 ```
