@@ -84,8 +84,12 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       Top Sponsors sheet, everyone at 4 or more sponsored. PENDING: Donny to
       confirm the Platinum/Gold split, currently assumed at 5 and up, and
       photos for all 11.
-- [!] **P1.8 Area Guide.** La Quinta and Coachella Valley content from Amy
-      into data/area-guide.json. Renamed from Spouse Guide Sep 17.
+- [x] **P1.8 Area Guide.** Done Sep 17 from PARTNERS INVITATIONAL
+      BROCHURE-2026.pdf. Nine sections: discounts, the other clubhouses,
+      private clubhouse amenities, resort dining, spas, shopping, hikes,
+      Coachella Valley and High Desert. OPEN: hours and direct numbers for the
+      Private Clubhouse, which the brochure's broken font encoding made
+      unsafe to read. Needs confirming with the club.
 - [!] **P1.9 Golf Genius.** GGIDs from Amy, one per round. Accept: deep link
       opens the Golf Genius app on a phone that has it installed.
 - [~] **P1.6 Concierge content.** Venues, travel, dress code, spouse policy,

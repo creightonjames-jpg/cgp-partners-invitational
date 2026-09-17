@@ -276,6 +276,21 @@ revive them. Ask Jim before deleting any of it. Golf Genius deep links use
 `https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>`, which is the only URL
 shape that opens their app instead of a browser. GGIDs have not arrived yet.
 
+**Reading PDFs and Office files on this Mac.** There is no poppler, no
+pdftotext, and `brew install` fails for the same Xcode licence reason git
+does. `node tools/pdftext.js <file.pdf>` is the workaround: it inflates the
+content streams with node's zlib and applies each font's ToUnicode CMap,
+including two-byte Type0 fonts. `tools/xlsx.js` does the same job for
+spreadsheets.
+
+**A warning about the 2026 brochure.** Its PGA WEST amenities page uses a
+subset font whose ToUnicode table is incomplete, so extraction silently drops
+individual digits. "760.564.3914" comes out as "70.54.3914". Hours are
+affected too, and it is not always visible which character went missing. The
+Area Guide deliberately omits every phone number and opening time from that
+one page rather than reconstructing them. Do not "fix" this by guessing. Get
+the numbers from the club.
+
 **Generated data files.** `data/teams.json` and `data/sponsors.json` are built
 by `node tools/build-roster.js <roster.xlsx>`. Do not hand edit either one, a
 rebuild overwrites it. Rerun it whenever a new roster arrives. It prints
