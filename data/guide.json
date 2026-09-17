@@ -7,8 +7,16 @@
       "title": "The Club",
       "logo": "assets/brand/pgawest-logo.png",
       "items": [
-        { "label": "PGA WEST Private Clubhouse", "detail": "55-955 PGA Blvd., La Quinta, California 92253. Home base for the week: registration, breakfast, scoring, and the evening events.", "phone": "(760) 564-7111", "url": "https://www.pgawest.com" },
-        { "label": "La Quinta Cliffhouse", "detail": "78250 Highway 111, La Quinta, California 92253. Monday's teams dinner." }
+        {
+          "label": "PGA WEST Private Clubhouse",
+          "detail": "55-955 PGA Blvd., La Quinta, California 92253. Home base for the week: registration, breakfast, scoring, and the evening events.",
+          "phone": "(760) 564-7111",
+          "url": "https://www.pgawest.com"
+        },
+        {
+          "label": "La Quinta Cliffhouse",
+          "detail": "78250 Highway 111, La Quinta, California 92253. Monday's teams dinner."
+        }
       ]
     },
     {
@@ -16,60 +24,112 @@
       "title": "Where You're Staying",
       "logo": "assets/brand/laquinta-logo.png",
       "items": [
-        { "label": "La Quinta Resort & Club", "detail": "A Waldorf Astoria Resort. 49-499 Eisenhower Drive, La Quinta, California 92253. Championship golf, resort pool, and a full-service spa.", "phone": "(760) 564-4111", "url": "https://www.laquintaresort.com" },
-        { "label": "Extending your stay", "detail": "Tell your Team Captain Host. The resort will contact you directly to confirm availability and rates." }
+        {
+          "label": "La Quinta Resort & Club",
+          "detail": "A Waldorf Astoria Resort. 49-499 Eisenhower Drive, La Quinta, California 92253. Championship golf, resort pool, and a full-service spa.",
+          "phone": "(760) 564-4111",
+          "url": "https://www.laquintaresort.com"
+        },
+        {
+          "label": "Extending your stay",
+          "detail": "Tell your Team Captain Host. The resort will contact you directly to confirm availability and rates."
+        }
       ]
     },
     {
       "id": "format",
       "title": "Format of Play",
       "items": [
-        { "label": "Monday, Nicklaus Private", "detail": "Two-person scramble. 35% of the low handicap player plus 15% of the high." },
-        { "label": "Tuesday, Palmer Private", "detail": "Two-person shamble. 70% of your GHIN handicap index." },
-        { "label": "The Shoot-Out", "detail": "The top three scoring teams, and ties, play a two-hole shoot-out to crown first, second, and third." },
-        { "label": "Team Captains", "detail": "Captains play in member groups each day in fivesomes, playing their own ball in a skins game." },
-        { "label": "How the groups work", "detail": "Monday and Tuesday mix the groups. You and a fellow member are paired with two members from an affiliate club." }
+        {
+          "label": "Monday, Nicklaus Private",
+          "detail": "Two-person scramble. 35% of the low handicap player plus 15% of the high."
+        },
+        {
+          "label": "Tuesday, Palmer Private",
+          "detail": "Two-person shamble. 70% of your GHIN handicap index."
+        },
+        {
+          "label": "The Shoot-Out",
+          "detail": "The top three scoring teams, and ties, play a two-hole shoot-out to crown first, second, and third."
+        },
+        {
+          "label": "Team Captains",
+          "detail": "Captains play in member groups each day in fivesomes, playing their own ball in a skins game."
+        },
+        {
+          "label": "How the groups work",
+          "detail": "Monday and Tuesday mix the groups. You and a fellow member are paired with two members from an affiliate club."
+        }
       ]
     },
     {
       "id": "dress",
       "title": "What to Wear",
       "items": [
-        { "label": "PGA WEST", "detail": "Country club casual. Summer attire is appropriate. No denim. Jackets are not required at social events." },
-        { "label": "Sunday opening party", "detail": "Light the Night in White. White attire, no denim." },
-        { "label": "La Quinta Cliffhouse", "detail": "Smart or elegant casual. Denim is allowed here." }
+        {
+          "label": "PGA WEST",
+          "detail": "Country club casual. Summer attire is appropriate. No denim. Jackets are not required at social events."
+        },
+        {
+          "label": "Sunday opening party",
+          "detail": "Light the Night in White. White attire, no denim."
+        },
+        {
+          "label": "La Quinta Cliffhouse",
+          "detail": "Smart or elegant casual. Denim is allowed here."
+        }
       ]
     },
     {
       "id": "travel",
       "title": "Getting Here",
       "items": [
-        { "label": "Flights", "detail": "Your Team Captain Host books the team's airfare from your completed Player Profile Sheet. Booking your own trip around the event? The club credits your member account up to the average team ticket price. Spouse airfare is booked and paid separately." },
-        { "label": "Ground transport", "detail": "Each team has rental vehicles for the airport, the course, and the resort. Please plan designated drivers." },
-        { "label": "Baggage", "detail": "Pay your own baggage fees and keep the receipts. They come back as a credit on your member account. Golf clubs count as baggage." },
-        { "label": "Driving yourself", "detail": "Local members who skip the team vehicles are reimbursed mileage or a fixed amount." }
+        {
+          "label": "Flights",
+          "detail": "Your Team Captain Host books the team's airfare from your completed Player Profile Sheet. Booking your own trip around the event? The club credits your member account up to the average team ticket price. Spouse airfare is booked and paid separately."
+        },
+        {
+          "label": "Ground transport",
+          "detail": "Each team has rental vehicles for the airport, the course, and the resort. Please plan designated drivers."
+        },
+        {
+          "label": "Baggage",
+          "detail": "Pay your own baggage fees and keep the receipts. They come back as a credit on your member account. Golf clubs count as baggage."
+        },
+        {
+          "label": "Driving yourself",
+          "detail": "Local members who skip the team vehicles are reimbursed mileage or a fixed amount."
+        }
       ]
     },
     {
       "id": "spouses",
       "title": "Spouses and Guests",
       "items": [
-        { "label": "Invited and encouraged", "detail": "The fee is $550, billed to your member statement, and non-refundable after September 15. Adults only. No children or pets." }
+        {
+          "label": "Invited and encouraged",
+          "detail": "We would love your spouse or significant other to join you for the week. The trip is planned for adults, so we are not able to host children or pets."
+        }
       ]
     },
     {
       "id": "extras",
       "title": "Extra Golf",
       "items": [
-        { "label": "Practice and spouse rounds", "detail": "Your Team Captain Host can schedule additional tee times at Palmer Advantage rates, $35 to $50 depending on the course." }
+        {
+          "label": "Practice and spouse rounds",
+          "detail": "Your Team Captain Host can schedule additional tee times at Palmer Advantage rates, $35 to $50 depending on the course."
+        }
       ]
     },
     {
       "id": "contacts",
       "title": "Who to Call",
-      "placeholder": true,
       "items": [
-        { "label": "Your Team Captain Host", "detail": "Names and numbers to come.", "placeholder": true }
+        {
+          "label": "Your Team Captain Host",
+          "detail": "Every club captain, with their mobile and email, is on the Teams tab. They are your first call for anything during the week."
+        }
       ]
     }
   ],

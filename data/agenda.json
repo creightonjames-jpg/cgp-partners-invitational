@@ -12,10 +12,28 @@
       "date": "Sunday, October 4",
       "location": "PGA WEST Private Clubhouse",
       "sessions": [
-        { "time": "All day", "title": "Resort arrivals" },
-        { "time": "5:00 pm", "title": "Registration and Swag Room", "detail": "5:00 to 6:30 pm. Reception Lobby.", "spouses": true },
-        { "time": "5:00 pm", "title": "Cocktails and social at Kennedy's", "detail": "5:00 to 6:30 pm.", "spouses": true },
-        { "time": "6:45 pm", "title": "Light the Night in White Opening Party", "detail": "6:45 to 9:00 pm. Ballroom. Wear white, no denim.", "spouses": true }
+        {
+          "time": "All day",
+          "title": "Resort arrivals"
+        },
+        {
+          "time": "5:00 pm",
+          "title": "Registration and Swag Room",
+          "detail": "5:00 to 6:30 pm. Reception Lobby.",
+          "spouses": true
+        },
+        {
+          "time": "5:00 pm",
+          "title": "Cocktails and social at Kennedy's",
+          "detail": "5:00 to 6:30 pm.",
+          "spouses": true
+        },
+        {
+          "time": "6:45 pm",
+          "title": "Light the Night in White Opening Party",
+          "detail": "6:45 to 9:00 pm. Ballroom. Wear white, no denim.",
+          "spouses": true
+        }
       ]
     },
     {
@@ -24,12 +42,34 @@
       "date": "Monday, October 5",
       "location": "PGA WEST Private Clubhouse",
       "sessions": [
-        { "time": "6:45 am", "title": "Breakfast and practice", "detail": "Clubhouse and driving range." },
-        { "time": "8:30 am", "title": "Round 1 shotgun", "detail": "Nicklaus Private Golf Course. Two-person scramble." },
-        { "time": "11:30 am", "title": "Player lunch on the golf course" },
-        { "time": "1:00 pm", "title": "Scoring in the Club Ballroom" },
-        { "time": "1:30 pm", "title": "Member Shootout", "spouses": true },
-        { "time": "6:00 pm", "title": "Teams dinner", "detail": "La Quinta Cliffhouse. Smart or elegant casual, denim is fine here." }
+        {
+          "time": "6:45 am",
+          "title": "Breakfast and practice",
+          "detail": "Clubhouse and driving range."
+        },
+        {
+          "time": "8:30 am",
+          "title": "Round 1 shotgun",
+          "detail": "Nicklaus Private Golf Course. Two-person scramble."
+        },
+        {
+          "time": "11:30 am",
+          "title": "Player lunch on the golf course"
+        },
+        {
+          "time": "1:00 pm",
+          "title": "Scoring in the Club Ballroom"
+        },
+        {
+          "time": "1:30 pm",
+          "title": "Member Shootout",
+          "spouses": true
+        },
+        {
+          "time": "6:00 pm",
+          "title": "Teams dinner",
+          "detail": "La Quinta Cliffhouse. Smart or elegant casual."
+        }
       ]
     },
     {
@@ -38,12 +78,38 @@
       "date": "Tuesday, October 6",
       "location": "PGA WEST Private Clubhouse",
       "sessions": [
-        { "time": "6:45 am", "title": "Breakfast and practice", "detail": "Clubhouse and driving range." },
-        { "time": "8:30 am", "title": "Round 2 shotgun", "detail": "Palmer Private Golf Course. Two-person shamble." },
-        { "time": "1:00 pm", "title": "Player lunch and scoring", "detail": "Club Ballroom." },
-        { "time": "2:00 pm", "title": "Top 3 Teams Shoot-Out", "detail": "The top three scoring teams, and ties, play a two-hole shoot-out for first, second, and third.", "spouses": true },
-        { "time": "5:30 pm", "title": "Cocktails and social at Kennedy's", "spouses": true },
-        { "time": "6:30 pm", "title": "Dinner and Awards Celebration", "detail": "Ballroom.", "spouses": true }
+        {
+          "time": "6:45 am",
+          "title": "Breakfast and practice",
+          "detail": "Clubhouse and driving range."
+        },
+        {
+          "time": "8:30 am",
+          "title": "Round 2 shotgun",
+          "detail": "Palmer Private Golf Course. Two-person shamble."
+        },
+        {
+          "time": "1:00 pm",
+          "title": "Player lunch and scoring",
+          "detail": "Club Ballroom."
+        },
+        {
+          "time": "2:00 pm",
+          "title": "Top 3 Teams Shoot-Out",
+          "detail": "The top three scoring teams, and ties, play a two-hole shoot-out for first, second, and third.",
+          "spouses": true
+        },
+        {
+          "time": "5:30 pm",
+          "title": "Cocktails and social at Kennedy's",
+          "spouses": true
+        },
+        {
+          "time": "6:30 pm",
+          "title": "Dinner and Awards Celebration",
+          "detail": "Ballroom.",
+          "spouses": true
+        }
       ]
     },
     {
@@ -51,7 +117,11 @@
       "label": "Wednesday",
       "date": "Wednesday, October 7",
       "sessions": [
-        { "time": "Morning", "title": "Flights and departures home", "detail": "Safe travels. See you next year." }
+        {
+          "time": "Morning",
+          "title": "Flights and departures home",
+          "detail": "Safe travels. See you next year."
+        }
       ]
     }
   ]

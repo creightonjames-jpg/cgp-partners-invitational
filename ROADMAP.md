@@ -56,8 +56,8 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
 
 - [x] **P1.1 Event dates and agenda.** Done Sep 14 from the final agenda doc
       (docs/2026-partners-final-agenda.docx). October 4 to 7, 2026.
-- [!] **P1.2 Roster.** Real attendee list into data/roster.json, headshots to
-      assets/attendees/. Accept: no sample entries remain on The Field.
+- [x] **P1.2 Roster.** Done Sep 17 from the master PI roster xlsx via
+      tools/build-roster.js. 25 clubs, 25 captains, 100 players.
 - [x] **P1.3 Logos.** PGA WEST, La Quinta Resort, and event wordmark pulled
       from the agenda doc and Jim's pasted hi-res files, Sep 14. Recolored
       variants (dusk, pool) generated with his approval. Masthead and
@@ -66,13 +66,14 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       Round 1 Nicklaus Private (two-person scramble), Round 2 Palmer Private
       (two-person shamble). Par values still flat-72 PLACEHOLDER in
       data/course.json until Jim confirms the scorecards.
-- [!] **P1.5 Teams.** Club, sponsor, and players into data/teams.json. Accept:
-      no sample entries remain on Teams.
-- [!] **P1.7 Top Sponsors.** Names, tiers, and logos from Donny into
-      data/sponsors.json and assets/sponsors/. Accept: no placeholder tier
-      remains, logos render crisp at 2x.
-- [!] **P1.8 Spouse Activities Guide.** Daytime program from Amy into
-      data/spouse-activities.json. Accept: no placeholder remains.
+- [x] **P1.5 Teams.** Done Sep 17. Club, Team Captain Host with mobile and
+      email, players with sponsored counts.
+- [x] **P1.7 Top Sponsors.** Done Sep 17. Platinum (5) and Gold (6) from the
+      Top Sponsors sheet, everyone at 4 or more sponsored. PENDING: Donny to
+      confirm the Platinum/Gold split, currently assumed at 5 and up, and
+      photos for all 11.
+- [!] **P1.8 Area Guide.** La Quinta and Coachella Valley content from Amy
+      into data/area-guide.json. Renamed from Spouse Guide Sep 17.
 - [!] **P1.9 Golf Genius.** GGIDs from Amy, one per round. Accept: deep link
       opens the Golf Genius app on a phone that has it installed.
 - [~] **P1.6 Concierge content.** Venues, travel, dress code, spouse policy,

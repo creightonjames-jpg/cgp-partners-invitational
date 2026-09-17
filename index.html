@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#F7F2E8">
 <title>The Partners Invitational</title>
 <meta name="description" content="The live wall for the 18th Annual Partners Invitational at PGA WEST, La Quinta, California. October 4 to 7, 2026.">
+<!-- Attendees reach this by QR code, and the Teams tab carries 25 captains
+     mobile numbers and emails. There is no reason for a search engine to
+     index it, and good reason not to. -->
+<meta name="robots" content="noindex, nofollow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -416,7 +420,7 @@ a { color: var(--pool-deep); }
 .like-btn.liked { color: var(--terra); font-weight: 600; }
 
 /* ------------------------------------------------------------------ teams */
-.team-card { display: flex; flex-direction: column; gap: 6px; }
+.team-card { display: flex; flex-direction: column; gap: 8px; }
 .team-club {
   font-family: var(--font-display);
   font-weight: 700;
@@ -425,57 +429,101 @@ a { color: var(--pool-deep); }
   font-size: 15px;
   color: var(--dusk);
 }
-.team-sponsor { font-size: 14px; color: var(--ink); }
-.team-sponsor-label {
+.team-captain-block {
+  background: var(--sand);
+  border-left: 3px solid var(--pool);
+  border-radius: 0 10px 10px 0;
+  padding: 8px 12px;
+}
+.team-captain-label {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--mute);
-  margin-right: 6px;
+  color: var(--pool-deep);
 }
-.team-players { list-style: none; margin: 2px 0 0; padding: 0; }
+.team-captain-name { font-weight: 600; font-size: 15px; }
+.team-captain-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.team-captain-contact a { overflow-wrap: anywhere; }
+.team-players { list-style: none; margin: 0; padding: 0; }
 .team-players li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   font-size: 14px;
-  padding: 3px 0;
+  padding: 4px 0;
   border-bottom: 1px solid var(--edge);
 }
 .team-players li:last-child { border-bottom: none; }
-.team-captain {
-  margin-left: 8px;
-  font-size: 10px;
+.team-sponsored {
+  flex: none;
+  min-width: 22px;
+  text-align: center;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--paper);
-  background: var(--pool);
+  background: var(--mustard);
   border-radius: 999px;
-  padding: 2px 8px;
+  padding: 1px 7px;
 }
 
 /* ----------------------------------------------------------- top sponsors */
-.tier-name { font-size: 13px; letter-spacing: 0.16em; color: var(--dusk); }
+.tier-name { font-size: 14px; letter-spacing: 0.2em; }
+.tier-platinum { color: var(--dusk); }
+.tier-gold { color: var(--mustard); }
 .sponsor-grid {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 .sponsor-card {
-  /* Sponsor logos arrive full colour and fight the desert palette. White
-     cards with real padding keep them legible and keep sponsors happy. */
-  background: #FFFFFF;
+  background: var(--paper);
   border: 1px solid var(--edge);
   border-radius: 14px;
-  padding: 18px 16px;
-  min-height: 104px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
+  gap: 3px;
 }
-.sponsor-logo { max-height: 64px; width: auto; object-fit: contain; }
-.sponsor-name { font-weight: 600; font-size: 15px; color: var(--ink); }
+.sponsor-photo-wrap { width: 100%; max-width: 132px; margin-bottom: 6px; }
+.sponsor-photo, .sponsor-mono {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--sand);
+  object-fit: cover;
+}
+.sponsor-mono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sand);
+  color: var(--pool-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.05em;
+}
+.sponsor-name { font-weight: 600; font-size: 15px; color: var(--ink); line-height: 1.3; }
+.sponsor-club { font-size: 13px; color: var(--dim); }
+.sponsor-count {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.sponsor-admin { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
 
 /* -------------------------------------------------------------- questions */
 .qa-textarea { display: block; width: 100%; resize: vertical; line-height: 1.5; }
@@ -625,7 +673,7 @@ const TABS = [
   { id: "teams",     label: "Teams" },
   { id: "sponsors",  label: "Top Sponsors" },
   { id: "guide",     label: "Program Guide" },
-  { id: "spouse",    label: "Spouse Guide" },
+  { id: "area",      label: "Area Guide" },
   { id: "photos",    label: "Photos" },
   { id: "questions", label: "Questions" },
 ];
@@ -647,6 +695,7 @@ function makeMemoryStore(seed) {
      Firebase snapshots are fresh objects every time, so this mirrors that. */
   const cloned = (path) => {
     const v = get(path);
+    if (v === undefined) return null;   // match Firebase: missing path is null
     return v != null && typeof v === "object" ? JSON.parse(JSON.stringify(v)) : v;
   };
 
@@ -710,7 +759,7 @@ const PREVIEW_SEED = {
   settings: {
     marquee: "Welcome to the desert. Sample content throughout while the wall is in preview.",
     adminPin: "0000",
-    tabs: { agenda: true, teams: true, sponsors: true, guide: true, spouse: true, photos: true, questions: true },
+    tabs: { agenda: true, teams: true, sponsors: true, guide: true, area: true, photos: true, questions: true },
     /* false: a question goes to the organizers and appears once answered.
        true: every question is public the moment it is asked. */
     qaPublic: false,
@@ -727,6 +776,7 @@ const PREVIEW_SEED = {
   },
   photos: {},
   photoLikes: {},
+  sponsorPhotos: {},
 };
 
 const store = PREVIEW ? makeMemoryStore(PREVIEW_SEED) : makeFirebaseStore();
@@ -868,8 +918,9 @@ function Agenda() {
 }
 
 /* ------------------------------------------------------------------ teams */
-/* Per Donny: club, sponsor, players. The search matches any of the three, so
-   a partner can find their own club or look up who a sponsor brought. */
+/* Club, captain, players. Captain contact is the only contact on the wall, by
+   design: they are the hosts attendees need to reach. Everything else in the
+   roster workbook stays out. See tools/build-roster.js. */
 function Teams() {
   const data = useJson("data/teams.json");
   const [q, setQ] = useState("");
@@ -877,13 +928,16 @@ function Teams() {
   const teams = data?.teams || [];
   const needle = q.trim().toLowerCase();
   const shown = !needle ? teams : teams.filter((t) =>
-    [t.club, t.sponsor, ...(t.players || [])].join(" ").toLowerCase().includes(needle));
+    [t.club, t.captain?.name, ...(t.players || []).map((p) => p.name)]
+      .filter(Boolean).join(" ").toLowerCase().includes(needle));
 
   return (
     <section>
       <h2 className="t-display page-title">Teams</h2>
-      <p className="page-sub">Every club in the field, with its sponsor and players.</p>
-      <input className="search" placeholder="Find a club, sponsor, or player" value={q}
+      <p className="page-sub">
+        Every club in the field, with its Team Captain Host and players.
+      </p>
+      <input className="search" placeholder="Find a club, captain, or player" value={q}
         onChange={(e) => setQ(e.target.value)} />
       {teams.length === 0 ? (
         <div className="empty">Teams will appear here once pairings are set.</div>
@@ -892,21 +946,38 @@ function Teams() {
       ) : (
         <div className="grid-cards">
           {shown.map((t) => (
-            <div className="card roof team-card" key={t.id || t.club}>
+            <div className="card roof team-card" key={t.id}>
               <div className="team-club">
                 {t.club} {t.placeholder && <PhChip />}
               </div>
-              {t.sponsor && (
-                <div className="team-sponsor">
-                  <span className="team-sponsor-label">Sponsor</span> {t.sponsor}
+
+              {t.captain && (
+                <div className="team-captain-block">
+                  <div className="team-captain-label">Team Captain Host</div>
+                  <div className="team-captain-name">{t.captain.name}</div>
+                  <div className="team-captain-contact">
+                    {t.captain.mobile && (
+                      <a href={"tel:" + t.captain.mobile.replace(/[^0-9+]/g, "")}>
+                        {t.captain.mobile}
+                      </a>
+                    )}
+                    {t.captain.email && (
+                      <a href={"mailto:" + t.captain.email}>{t.captain.email}</a>
+                    )}
+                  </div>
                 </div>
               )}
+
               {(t.players || []).length > 0 && (
                 <ul className="team-players">
                   {t.players.map((p, i) => (
                     <li key={i}>
-                      {p}
-                      {t.captain === p && <span className="team-captain">Captain</span>}
+                      <span>{p.name}</span>
+                      {p.sponsored > 0 && (
+                        <span className="team-sponsored" title="Members sponsored">
+                          {fmtNum(p.sponsored)}
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -915,14 +986,84 @@ function Teams() {
           ))}
         </div>
       )}
+      <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 14 }}>
+        The number beside a player is how many full privilege members they
+        sponsored this year.
+      </p>
     </section>
   );
 }
 
 /* ----------------------------------------------------------- top sponsors */
-function Sponsors() {
+/* Platinum and Gold: the members who sponsored the most. Photos come from
+   assets/sponsors/<slug>.jpg, and an organizer can upload one from here,
+   which lands in Firebase and wins over the file. */
+function SponsorCard({ s, uploaded, admin }) {
+  const [broken, setBroken] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const fileRef = useRef();
+
+  const src = uploaded || (broken ? null : s.photo);
+  /* First name plus surname, so a couple reads "TS" rather than "T". */
+  const words = s.name.split(/\s+/).filter((w) => w && w !== "&");
+  const initials = words.length
+    ? (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase()
+    : "";
+
+  const upload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setBusy(true);
+    try {
+      const dataUrl = await compressImage(file, 800, 0.82);
+      await store.set(`sponsorPhotos/${s.slug}`, dataUrl);
+    } catch (err) {
+      console.error("sponsor photo failed", err);
+      alert("That photo did not go through. Try again.");
+    }
+    setBusy(false);
+  };
+
+  return (
+    <div className="sponsor-card">
+      <div className="sponsor-photo-wrap">
+        {src ? (
+          <img className="sponsor-photo" src={src} alt={s.name}
+            onError={() => setBroken(true)} />
+        ) : (
+          <div className="sponsor-mono">{initials}</div>
+        )}
+      </div>
+      <div className="sponsor-name">{s.name}</div>
+      <div className="sponsor-club">{s.club}</div>
+      <div className="sponsor-count">{fmtNum(s.count)} sponsored</div>
+      {admin && (
+        <div className="sponsor-admin">
+          <input ref={fileRef} type="file" accept="image/*"
+            style={{ display: "none" }} onChange={upload} />
+          <button className="btn btn-quiet btn-sm" disabled={busy}
+            onClick={() => fileRef.current.click()}>
+            {busy ? "Uploading…" : uploaded ? "Replace photo" : "Upload photo"}
+          </button>
+          {uploaded && (
+            <button className="btn btn-danger btn-sm"
+              onClick={() => {
+                if (confirm(`Remove the uploaded photo for ${s.name}?`)) {
+                  store.remove(`sponsorPhotos/${s.slug}`);
+                }
+              }}>Remove</button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Sponsors({ admin }) {
   const data = useJson("data/sponsors.json");
-  if (data === undefined) return null;
+  const uploads = useNode("sponsorPhotos");
+  if (data === undefined || uploads === undefined) return null;
   const tiers = data?.tiers || [];
   return (
     <section>
@@ -933,30 +1074,27 @@ function Sponsors() {
       ) : (
         <div className="stack">
           {tiers.map((tier) => (
-            <div key={tier.id}>
+            <div key={tier.tier}>
               <div className="sunburst">
-                <span className="t-display tier-name">
-                  {tier.name} {tier.placeholder && <PhChip />}
+                <span className={"t-display tier-name tier-" + tier.tier.toLowerCase()}>
+                  {tier.tier}
                 </span>
               </div>
               <div className="sponsor-grid">
-                {(tier.sponsors || []).map((s, i) => {
-                  const inner = s.logo
-                    ? <img className="sponsor-logo" src={s.logo} alt={s.name} />
-                    : <span className="sponsor-name">{s.name}</span>;
-                  return (
-                    <div className="sponsor-card" key={i}>
-                      {s.url
-                        ? <a href={s.url} target="_blank" rel="noopener">{inner}</a>
-                        : inner}
-                      {s.placeholder && <div style={{ marginTop: 8 }}><PhChip /></div>}
-                    </div>
-                  );
-                })}
+                {(tier.sponsors || []).map((s) => (
+                  <SponsorCard key={s.slug} s={s} admin={admin}
+                    uploaded={uploads?.[s.slug]} />
+                ))}
               </div>
             </div>
           ))}
         </div>
+      )}
+      {admin && (
+        <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 16 }}>
+          Photos also load from assets/sponsors/&lt;name&gt;.jpg in the repo.
+          An upload here overrides the file.
+        </p>
       )}
     </section>
   );
@@ -1245,7 +1383,7 @@ function Gallery({ admin }) {
   );
 }
 
-/* ---------------------------------------------------- guide and spouse guide */
+/* ------------------------------------------------------ guide and area guide */
 /* Both guides are the same shape: titled cards holding labelled items. One
    renderer, two data files. */
 function InfoSections({ sections }) {
@@ -1304,12 +1442,12 @@ function Guide() {
   );
 }
 
-function SpouseGuide() {
-  const data = useJson("data/spouse-activities.json");
+function AreaGuide() {
+  const data = useJson("data/area-guide.json");
   if (data === undefined) return null;
   return (
     <section>
-      <h2 className="t-display page-title">Spouse Activities Guide</h2>
+      <h2 className="t-display page-title">Area Guide</h2>
       <p className="page-sub">{data?.intro}</p>
       <InfoSections sections={data?.sections} />
     </section>
@@ -1596,9 +1734,9 @@ function App() {
       <main className="shell">
         {tab === "agenda" && <Agenda />}
         {tab === "teams" && <Teams />}
-        {tab === "sponsors" && <Sponsors />}
+        {tab === "sponsors" && <Sponsors admin={admin} />}
         {tab === "guide" && <Guide />}
-        {tab === "spouse" && <SpouseGuide />}
+        {tab === "area" && <AreaGuide />}
         {tab === "photos" && <Gallery admin={admin} />}
         {tab === "questions" && <Questions admin={admin} />}
         {tab === "admin" && admin && <AdminPanel onExit={exitAdmin} />}

@@ -217,6 +217,21 @@ cards (butterfly roof angle on card headers), scorecard grid, mountain horizon.
 
 ---
 
+## Privacy, read this before touching the roster
+
+The master roster workbook (OneDrive, "2026 MASTER USE THIS ONE - PI ROSTER
+ORIGINAL") holds dates of birth, home addresses, emergency contacts, food
+allergies, airline rewards numbers, passport names, handicap indexes and
+apparel sizes for 125 people. **The wall is a public URL.**
+
+`tools/build-roster.js` is the gate. It copies only club, names, the
+captain mobile and work email, and the sponsored count. Adding a field there
+publishes it to the open internet. Ask Jim first, every time.
+
+Player contact details are deliberately NOT published. Captains only, because
+they are the hosts attendees need to reach. The page carries a noindex tag so
+the contact details do not end up in search results.
+
 ## The seven tabs
 
 Donny set this list on Sep 15. His order, his names. Do not add, rename, or
@@ -225,10 +240,10 @@ reorder a tab without him.
 | Tab | Function | Data source |
 |---|---|---|
 | Agenda | Schedule with day pills | data/agenda.json |
-| Teams | Club, sponsor, players, searchable | data/teams.json |
-| Top Sponsors | Logo grid by tier | data/sponsors.json |
+| Teams | Club, captain contact, players | data/teams.json (GENERATED) |
+| Top Sponsors | Platinum and Gold members, photos | data/sponsors.json (GENERATED) |
 | Program Guide | Venues, format, dress, travel, documents | data/guide.json |
-| Spouse Guide | Daytime program for spouses | data/spouse-activities.json |
+| Area Guide | La Quinta and Coachella Valley | data/area-guide.json |
 | Photos | Photo uploads with likes | Firebase photos/ |
 | Questions | Attendees ask, organizers answer | Firebase questions/ |
 
@@ -246,10 +261,20 @@ revive them. Ask Jim before deleting any of it. Golf Genius deep links use
 `https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>`, which is the only URL
 shape that opens their app instead of a browser. GGIDs have not arrived yet.
 
+**Generated data files.** `data/teams.json` and `data/sponsors.json` are built
+by `node tools/build-roster.js <roster.xlsx>`. Do not hand edit either one, a
+rebuild overwrites it. Rerun it whenever a new roster arrives. It prints
+warnings for bad source data, currently one malformed captain mobile.
+
 **Orphaned data files.** `data/concierge.json`, `data/resources.json`, and
 `data/roster.json` were folded into `guide.json` and `teams.json` on Sep 15.
 Nothing reads them. They are still on disk pending Jim's approval to delete.
 Do not edit them expecting a change on the wall.
+
+**The preview store returns null, not undefined,** for a path that does not
+exist, because that is what Firebase does. A component that treats undefined
+as "still loading" rendered a blank tab forever when its node was unseeded.
+Fixed Sep 17 in `makeMemoryStore`. Do not reintroduce it.
 
 ---
 

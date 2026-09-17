@@ -1,0 +1,18 @@
+{
+  "_note": "PLACEHOLDER. Needs the area guide content from Amy (ROADMAP P1.8): spa, pool, tennis, El Paseo shopping, the Palm Springs tram, galleries, restaurants, and any organized excursions, with times and whether anything needs a reservation. The starred events already on the Agenda are the evening programme and do not need repeating here.",
+  "intro": "La Quinta and Coachella Valley Area Guide.",
+  "sections": [
+    {
+      "id": "sample",
+      "title": "Guide to come",
+      "placeholder": true,
+      "items": [
+        {
+          "label": "Content to come",
+          "detail": "Amy is putting the area guide together. It will land here.",
+          "placeholder": true
+        }
+      ]
+    }
+  ]
+}
