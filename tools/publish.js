@@ -101,7 +101,27 @@ gh(["api", `repos/${OWNER}/${REPO}/git/refs/heads/${BRANCH}`, "-X", "PATCH"], {
 });
 console.log("pushed to", BRANCH);
 
-/* 6. Pages, enabled on first run only. */
+/* 6. Wait for THIS commit to finish building.
+      Polling for "built" alone is a trap: the previous build is still the
+      latest one for a few seconds after a push, so you get "built", curl the
+      site, and see the old content. Match the commit sha, not just status. */
+function waitForBuild(sha) {
+  for (let i = 0; i < 30; i++) {
+    let b;
+    try { b = gh(["api", `repos/${OWNER}/${REPO}/pages/builds/latest`]); }
+    catch { execFileSync("sleep", ["10"]); continue; }
+    if (b.commit === sha && b.status === "built") { console.log("pages built:", sha.slice(0, 7)); return true; }
+    if (b.commit === sha && b.status === "errored") {
+      console.log("PAGES BUILD FAILED for", sha.slice(0, 7), b.error && b.error.message);
+      return false;
+    }
+    execFileSync("sleep", ["10"]);
+  }
+  console.log("gave up waiting for the pages build; check manually");
+  return false;
+}
+
+/* 7. Pages, enabled on first run only. */
 try {
   const pages = gh(["api", `repos/${OWNER}/${REPO}/pages`]);
   console.log("pages already on:", pages.html_url);
@@ -112,3 +132,5 @@ try {
   });
   console.log("pages:", pages.html_url);
 }
+
+waitForBuild(commit.sha);
