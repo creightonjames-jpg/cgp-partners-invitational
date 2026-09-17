@@ -1,0 +1,8 @@
+{
+  "database": [
+    {
+      "instance": "cgp-partners-inv-2026",
+      "rules": "database.rules.json"
+    }
+  ]
+}

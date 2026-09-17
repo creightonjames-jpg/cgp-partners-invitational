@@ -696,13 +696,20 @@ a { color: var(--pool-deep); }
 const { useState, useEffect, useMemo, useRef, useCallback } = React;
 
 /* ---------------------------------------------------------- configuration */
-/* Paste the real Firebase web config here (ROADMAP P2.1). While apiKey reads
-   PASTE_ME the app runs in preview mode on an in-memory store. */
+/* Live since Sep 17. The wall has its OWN Realtime Database instance,
+   cgp-partners-inv-2026, which happens to sit inside the membership wall's
+   Firebase project because that Google account has hit its project quota.
+   Separate instance means separate data and separate rules: nothing here can
+   read or write the membership wall's database. If the quota is ever freed,
+   moving to a dedicated project is a one line change to databaseURL.
+
+   An apiKey in client code is normal for Firebase. It identifies the project,
+   it is not a secret. The database rules are what control access. */
 const FIREBASE_CONFIG = {
-  apiKey: "PASTE_ME",
-  authDomain: "PASTE_ME",
-  databaseURL: "PASTE_ME",
-  projectId: "PASTE_ME",
+  apiKey: "AIzaSyAZZfeJWyq7HVHlSEuucquCLHyXTmtrXco",
+  authDomain: "cgp-membership-wall-2026.firebaseapp.com",
+  databaseURL: "https://cgp-partners-inv-2026.firebaseio.com",
+  projectId: "cgp-membership-wall-2026",
 };
 const PREVIEW = FIREBASE_CONFIG.apiKey === "PASTE_ME";
 
@@ -1806,6 +1813,7 @@ function PinGate({ onPass, onClose }) {
 function AdminPanel({ onExit }) {
   const settings = useNode("settings");
   const [marquee, setMarquee] = useState(null);
+  const [newPin, setNewPin] = useState("");
   if (settings === undefined) return null;
 
   const tabVis = settings?.tabs || {};
@@ -1828,6 +1836,26 @@ function AdminPanel({ onExit }) {
           onClick={() => { store.set("settings/marquee", marqueeVal); setMarquee(null); }}>
           Publish
         </button>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Staff PIN</h3>
+        <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 10 }}>
+          Anyone with this PIN can post answers, upload sponsor photos, and
+          remove content. Change it if it gets passed around.
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <input className="field" style={{ flex: "1 1 140px" }}
+            inputMode="numeric" placeholder="New PIN"
+            value={newPin} onChange={(e) => setNewPin(e.target.value)} />
+          <button className="btn btn-sm" onClick={() => {
+            const p = newPin.trim();
+            if (p.length < 4) { alert("Use at least four digits."); return; }
+            store.set("settings/adminPin", p);
+            setNewPin("");
+            alert("PIN changed. Everyone signed in stays signed in.");
+          }}>Change PIN</button>
+        </div>
       </div>
 
       <div className="card admin-section">
