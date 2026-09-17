@@ -17,12 +17,11 @@ const path = require("path");
 const { execFileSync } = require("child_process");
 const os = require("os");
 
-/* Top Sponsors are the Platinum and Gold tiers only, per Donny, which is
-   everyone who sponsored 4 or more. ASSUMPTION pending his confirmation:
-   Platinum is 5 and up, Gold is 4 to 4.9. Change these two numbers if he
-   splits it differently. */
+/* Top Sponsors are the Platinum and Gold tiers only, per Donny: everyone who
+   sponsored 4 or more. He confirmed the split on Sep 17. Platinum is the top
+   two, Trey Showalter at 7 and the Spitzers at 6. Gold is 4 through 5. */
 const TOP_SPONSOR_MIN = 4;
-const PLATINUM_MIN = 5;
+const PLATINUM_MIN = 6;
 
 const SRC = process.argv[2];
 if (!SRC || !fs.existsSync(SRC)) {

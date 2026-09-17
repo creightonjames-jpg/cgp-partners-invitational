@@ -80,10 +80,9 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       data/course.json until Jim confirms the scorecards.
 - [x] **P1.5 Teams.** Done Sep 17. Club, Team Captain Host with mobile and
       email, players with sponsored counts.
-- [x] **P1.7 Top Sponsors.** Done Sep 17. Platinum (5) and Gold (6) from the
-      Top Sponsors sheet, everyone at 4 or more sponsored. PENDING: Donny to
-      confirm the Platinum/Gold split, currently assumed at 5 and up, and
-      photos for all 11.
+- [x] **P1.7 Top Sponsors.** Done Sep 17. Everyone at 4 or more sponsored.
+      Donny confirmed the split: Platinum is the top two (2), Gold is 4
+      through 5 (9). OPEN: headshots for all 11.
 - [x] **P1.8 Area Guide.** Done Sep 17 from PARTNERS INVITATIONAL
       BROCHURE-2026.pdf. Nine sections: discounts, the other clubhouses,
       private clubhouse amenities, resort dining, spas, shopping, hikes,

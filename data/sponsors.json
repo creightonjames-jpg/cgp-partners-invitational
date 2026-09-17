@@ -21,13 +21,18 @@
           "count": 6,
           "tier": "Platinum",
           "photo": null
-        },
+        }
+      ]
+    },
+    {
+      "tier": "Gold",
+      "sponsors": [
         {
           "slug": "jenny-tronson",
           "name": "Jenny Tronson",
           "club": "Canyon Oaks Country Club",
           "count": 5,
-          "tier": "Platinum",
+          "tier": "Gold",
           "photo": null
         },
         {
@@ -35,7 +40,7 @@
           "name": "Kim & Deanne Ashmore",
           "club": "Valor Club",
           "count": 5,
-          "tier": "Platinum",
+          "tier": "Gold",
           "photo": null
         },
         {
@@ -43,14 +48,9 @@
           "name": "Rick McLimore",
           "club": "Marbella Country Club",
           "count": 5,
-          "tier": "Platinum",
+          "tier": "Gold",
           "photo": null
-        }
-      ]
-    },
-    {
-      "tier": "Gold",
-      "sponsors": [
+        },
         {
           "slug": "ben-raymond",
           "name": "Ben Raymond",
