@@ -89,8 +89,10 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       Coachella Valley and High Desert. OPEN: hours and direct numbers for the
       Private Clubhouse, which the brochure's broken font encoding made
       unsafe to read. Needs confirming with the club.
-- [!] **P1.9 Golf Genius.** GGIDs from Amy, one per round. Accept: deep link
-      opens the Golf Genius app on a phone that has it installed.
+- [~] **P1.9 Golf Genius.** Live Scoring tab built Sep 19, second pill.
+      Deep link and Today badge verified with test values. BLOCKED on the
+      GGIDs from Amy, one per round, into data/scoring.json. Accept: deep
+      link opens the Golf Genius app on a phone that has it installed.
 - [~] **P1.6 Concierge content.** Venues, travel, dress code, spouse policy,
       and extra golf filled from the doc Sep 14. Still open: Who to Call
       (Team Captain Host names and numbers).

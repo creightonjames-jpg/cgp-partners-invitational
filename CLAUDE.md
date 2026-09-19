@@ -270,14 +270,16 @@ Player contact details are deliberately NOT published. Captains only, because
 they are the hosts attendees need to reach. The page carries a noindex tag so
 the contact details do not end up in search results.
 
-## The seven tabs
+## The eight tabs
 
 Donny set this list on Sep 15. His order, his names. Do not add, rename, or
-reorder a tab without him.
+reorder a tab without him. Jim added Live Scoring on Sep 19, in second place
+so it is reachable without scrolling the strip on a phone.
 
 | Tab | Function | Data source |
 |---|---|---|
 | Agenda | Schedule with day pills | data/agenda.json |
+| Live Scoring | Golf Genius hand-off per round | data/scoring.json |
 | Teams | Club, captain contact, players | data/teams.json (GENERATED) |
 | Top Sponsors | Platinum and Gold members, photos | data/sponsors.json (GENERATED) |
 | Program Guide | Venues, format, dress, travel, documents | data/guide.json |
@@ -290,6 +292,14 @@ publishes when it is answered. The asker sees their own marked as sent, via
 `pinv_asked`. A room of partners should never see a column of unanswered
 questions. `settings/qaPublic` flips this to publish everything immediately,
 toggled from the admin panel.
+
+**Live Scoring needs GGIDs.** `data/scoring.json` holds one per round. Until
+they arrive each round shows a labelled placeholder instead of a dead button.
+The ONLY URL that opens the Golf Genius app rather than a browser is
+`https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>`, which is the single
+path in their apple-app-site-association. Any other Golf Genius URL opens in
+Safari. `leaderboardUrl` is separate and optional, for a public view-only
+leaderboard if Amy publishes one.
 
 **The Leaderboard is parked, not deleted.** Golf Genius runs scoring for this
 event and computes the handicap allowances itself, so a second leaderboard

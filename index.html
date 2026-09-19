@@ -464,6 +464,48 @@ a { color: var(--pool-deep); }
 }
 .like-btn.liked { color: var(--terra); font-weight: 600; }
 
+/* --------------------------------------------------------- live scoring */
+.score-card { display: flex; flex-direction: column; gap: 6px; }
+.score-today { border-color: var(--pool); box-shadow: 0 0 0 2px var(--glow); }
+.score-head { display: flex; align-items: center; gap: 10px; }
+.score-round {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+  color: var(--dusk);
+}
+.score-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--pool);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+.score-meta { font-size: 14px; color: var(--dim); }
+/* A thumb-sized target: this gets tapped on a cart, in the sun, in a glove. */
+.score-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 14px 18px;
+  font-size: 16px;
+}
+.score-pending {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px dashed var(--edge);
+  border-radius: 10px;
+  background: var(--sand);
+  color: var(--dim);
+  font-size: 14px;
+}
+
 /* ------------------------------------------------------------------ teams */
 .team-card { display: flex; flex-direction: column; gap: 8px; }
 .team-club {
@@ -722,6 +764,7 @@ const LS = {
 /* Donny's seven, in his order. Sep 15. */
 const TABS = [
   { id: "agenda",    label: "Agenda" },
+  { id: "scoring",   label: "Live Scoring" },
   { id: "teams",     label: "Teams" },
   { id: "sponsors",  label: "Top Sponsors" },
   { id: "guide",     label: "Program Guide" },
@@ -811,7 +854,7 @@ const PREVIEW_SEED = {
   settings: {
     marquee: "Welcome to the desert. Sample content throughout while the wall is in preview.",
     adminPin: "0000",
-    tabs: { agenda: true, teams: true, sponsors: true, guide: true, area: true, photos: true, questions: true },
+    tabs: { agenda: true, scoring: true, teams: true, sponsors: true, guide: true, area: true, photos: true, questions: true },
     /* false: a question goes to the organizers and appears once answered.
        true: every question is public the moment it is asked. */
     qaPublic: false,
@@ -965,6 +1008,73 @@ function Agenda() {
           <span style={{ color: "var(--mustard)" }}>&#10035;</span> {agenda.footnote}
         </p>
       )}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------- live scoring */
+/* Golf Genius owns scoring. This tab is the shortcut to it. The deeplink_ggid
+   URL is the only shape that hands off to their app instead of a browser,
+   verified against their apple-app-site-association on Sep 15. Without a GGID
+   there is nothing useful to link to, so the round says so plainly rather
+   than offering a button that goes nowhere. */
+function LiveScoring() {
+  const data = useJson("data/scoring.json");
+  if (data === undefined) return null;
+  const rounds = data?.rounds || [];
+
+  /* Local date, so "today" means today where the player is standing. */
+  const today = new Date();
+  const iso = today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Live Scoring</h2>
+      <p className="page-sub">{data?.intro}</p>
+
+      <div className="stack">
+        {rounds.map((r) => {
+          const isToday = r.date === iso;
+          const link = r.ggid
+            ? "https://www.golfgenius.com/deeplink_ggid?ggid=" + encodeURIComponent(r.ggid)
+            : null;
+          return (
+            <div className={"card roof score-card" + (isToday ? " score-today" : "")} key={r.id}>
+              <div className="score-head">
+                <span className="score-round">{r.label}</span>
+                {isToday && <span className="score-badge">Today</span>}
+              </div>
+              <div className="score-meta">
+                {r.day} &middot; {r.course} &middot; {r.format}
+              </div>
+              {link ? (
+                <a className="btn score-btn" href={link} target="_blank" rel="noopener">
+                  Open my scorecard
+                </a>
+              ) : (
+                <div className="score-pending">
+                  Scoring opens here on the morning of the round. <PhChip />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {data?.leaderboardUrl && (
+        <div className="card roof roof-mustard" style={{ marginTop: 12 }}>
+          <div className="con-label">Following along?</div>
+          <div className="con-detail">The live leaderboard is open to everyone.</div>
+          <a className="btn btn-quiet score-btn" href={data.leaderboardUrl}
+            target="_blank" rel="noopener">Open the leaderboard</a>
+        </div>
+      )}
+
+      <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 14 }}>
+        {data?.appNote}
+      </p>
     </section>
   );
 }
@@ -1946,6 +2056,7 @@ function App() {
 
       <main className="shell">
         {tab === "agenda" && <Agenda />}
+        {tab === "scoring" && <LiveScoring />}
         {tab === "teams" && <Teams />}
         {tab === "sponsors" && <Sponsors admin={admin} />}
         {tab === "guide" && <Guide />}

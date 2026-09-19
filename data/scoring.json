@@ -1,0 +1,26 @@
+{
+  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. Put each round's GGID below and the buttons light up. Leave it null and the round shows a clearly labelled placeholder.",
+  "intro": "Scoring runs in Golf Genius. Tap your round to open your scorecard.",
+  "appNote": "Opens the Golf Genius app if you have it installed, otherwise your browser.",
+  "rounds": [
+    {
+      "id": "r1",
+      "label": "Round 1",
+      "day": "Monday, October 5",
+      "date": "2026-10-05",
+      "course": "Nicklaus Private",
+      "format": "Two-person scramble",
+      "ggid": null
+    },
+    {
+      "id": "r2",
+      "label": "Round 2",
+      "day": "Tuesday, October 6",
+      "date": "2026-10-06",
+      "course": "Palmer Private",
+      "format": "Two-person shamble",
+      "ggid": null
+    }
+  ],
+  "leaderboardUrl": null
+}
