@@ -11,6 +11,19 @@
      index it, and good reason not to. -->
 <meta name="robots" content="noindex, nofollow">
 
+<!-- Add to Home Screen. start_url and scope in the manifest are "./" because
+     this is served from a project subpath, not a domain root. Point them at
+     "/" and every relative fetch breaks once it launches standalone.
+     iOS ignores manifest icons for the home screen, hence apple-touch-icon,
+     and it paints black behind transparency, hence the cream matte. -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Invitational">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Yellowtail&family=Inter:wght@400;500;600;700&display=swap">
@@ -59,6 +72,9 @@ html, body { margin: 0; padding: 0; }
 
 body {
   min-height: 100svh;
+  /* Launched from the home screen there is no address bar, so without this
+     the marquee sits under the status bar and the notch. */
+  padding-top: var(--safe-t);
   background: var(--linen);
   color: var(--ink);
   font-family: var(--font-body);

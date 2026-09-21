@@ -106,7 +106,7 @@ console.log("pushed to", BRANCH);
       latest one for a few seconds after a push, so you get "built", curl the
       site, and see the old content. Match the commit sha, not just status. */
 function waitForBuild(sha) {
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 90; i++) {   // Pages can take several minutes
     let b;
     try { b = gh(["api", `repos/${OWNER}/${REPO}/pages/builds/latest`]); }
     catch { execFileSync("sleep", ["10"]); continue; }
