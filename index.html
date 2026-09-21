@@ -176,22 +176,20 @@ a { color: var(--pool-deep); }
   line-height: 1.1;
   margin: 10px 0 0;
 }
-.masthead-title {
-  font-size: clamp(30px, 7.5vw, 54px);
-  line-height: 1.05;
-  margin: 2px 0 10px;
-  color: var(--ink);
-}
 .masthead-venue {
   font-size: 13px;
   letter-spacing: 0.22em;
   color: var(--pool-deep);
 }
-.masthead-logo {
-  margin: 18px auto 0;
-  height: 74px;
-  width: auto;
-  display: inline-block;
+/* The event wordmark. Supplied as black on white with no alpha, so multiply
+   drops the white onto the cream and leaves the artwork. */
+.masthead-mark { margin: 10px 0 14px; }
+.masthead-mark img {
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  margin: 0 auto;
+  mix-blend-mode: multiply;
 }
 .con-logo {
   height: 44px;
@@ -1011,13 +1009,14 @@ function Masthead({ agenda }) {
           Century Golf Partners &middot; {agenda?.edition || "18th Annual"}
         </div>
         <div className="t-script masthead-script">Welcome to the desert</div>
-        <h1 className="t-display masthead-title">The Partners Invitational</h1>
+        <h1 className="masthead-mark">
+          <img src="assets/brand/partners-invitational-logo.jpg"
+            alt="The Partners Invitational" />
+        </h1>
         <div className="t-display masthead-venue">
           PGA WEST &middot; La Quinta, California
           {agenda && <span> &middot; {agenda.dates}</span>}
         </div>
-        <img className="masthead-logo" src="assets/brand/pgawest-logo-dusk.png"
-          alt="PGA WEST" />
       </div>
       <Horizon />
     </header>

@@ -11,7 +11,12 @@ Invitational, October 4 to 7, 2026, at PGA WEST in La Quinta, California, with
 lodging at the La Quinta Resort & Club. Attendees reach it by QR code. The
 audience is partners and owners, so the register is polished and upscale. The
 look is mid-century Palm Springs: light, airy, cream and aqua and mustard,
-breeze block and butterfly roof motifs, with the PGA WEST logo in the masthead.
+breeze block and butterfly roof motifs. The masthead carries the official
+Partners Invitational wordmark (golfer plus serif type), which replaced both
+the typographic title and the PGA WEST mark on Sep 21. The wordmark is
+supplied black on white with no alpha, so it renders with mix-blend-mode
+multiply to drop the white onto the cream. PGA WEST still appears in the
+masthead venue line and with its own logo on the Program Guide.
 
 The golf: two-person teams. Round 1 Monday is a two-person scramble on the
 Nicklaus Private (35% low index + 15% high). Round 2 Tuesday is a two-person
