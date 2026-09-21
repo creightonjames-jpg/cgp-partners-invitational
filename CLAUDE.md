@@ -119,6 +119,19 @@ separate rules. Nothing in this wall can read or write the membership wall's
 database. If the quota is ever freed, moving to a dedicated project is a one
 line change to `databaseURL` plus a rules deploy.
 
+**Home screen identity.** The icon is the golfer from the event wordmark,
+recoloured to #0C547C (sampled from the silhouette Jim supplied) on the cream
+ground, at assets/brand/icon-golfer-*.png. It is cut from the 2000px wordmark
+rather than the 139px file he attached, which was far too small for a 512px
+icon. The label under the icon is "The Partners", which lives in TWO places
+and both must agree: `apple-mobile-web-app-title` for iOS and `short_name`
+in the manifest for Android. The manifest `name` stays the full event title.
+
+iOS caches the home screen icon hard. Anyone who added the wall before Sep 21
+keeps the old PGA WEST icon until they remove the shortcut and add it again.
+The old apple-touch-icon.png, icon-192/512 and favicon-32 are still in
+assets/brand/ and nothing references them.
+
 **Photo inventory.** `assets/photos/` mixes two sources. The three ORIGINALS
 Jim sent on Sep 21 are full resolution and final: `teams-band.jpg` (hands in
 a circle, heads the Teams tab), `round2-pair.jpg` (Tuesday's round) and
