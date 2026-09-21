@@ -119,9 +119,18 @@ separate rules. Nothing in this wall can read or write the membership wall's
 database. If the quota is ever freed, moving to a dedicated project is a one
 line change to `databaseURL` plus a rules deploy.
 
-**Editorial photos are PROVISIONAL.** `assets/photos/` holds the masthead
-band and four agenda photos, all cropped out of the single collage image in
-the 2026 brochure as a look test. They are low resolution because of it: the
+**Photo inventory.** `assets/photos/` mixes two sources. The three ORIGINALS
+Jim sent on Sep 21 are full resolution and final: `teams-band.jpg` (hands in
+a circle, heads the Teams tab), `round2-pair.jpg` (Tuesday's round) and
+`course-lunch.jpg` (Monday's player lunch). The rest are collage crops, see
+below.
+
+A tab can wear a photo under its title with `className="section-band"`. Teams
+is the only one using it so far; the CSS is generic on purpose.
+
+**The collage crops are PROVISIONAL.** The masthead band and four agenda
+photos were cropped out of the single collage image in the 2026 brochure as a
+look test. They are low resolution because of it: the
 band is 1268px wide, which is under retina at desktop. Jim is sourcing the
 originals. When they arrive, replace the files at the same paths and nothing
 else needs touching. `tools/` has no script for this; the crops were made

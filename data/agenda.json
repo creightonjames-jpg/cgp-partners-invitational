@@ -56,7 +56,8 @@
         },
         {
           "time": "11:30 am",
-          "title": "Player lunch on the golf course"
+          "title": "Player lunch on the golf course",
+          "photo": "assets/photos/course-lunch.jpg"
         },
         {
           "time": "1:00 pm",
@@ -90,7 +91,8 @@
         {
           "time": "8:30 am",
           "title": "Round 2 shotgun",
-          "detail": "Palmer Private Golf Course. Two-person shamble."
+          "detail": "Palmer Private Golf Course. Two-person shamble.",
+          "photo": "assets/photos/round2-pair.jpg"
         },
         {
           "time": "1:00 pm",

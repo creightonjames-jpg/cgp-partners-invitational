@@ -346,6 +346,16 @@ a { color: var(--pool-deep); }
 .session-detail { color: var(--dim); font-size: 14px; margin-top: 2px; }
 /* Last year, showing what the evening actually looks like. Beats describing
    a dress code in a sentence. */
+.section-band {
+  width: 100%;
+  height: clamp(110px, 20vw, 190px);
+  object-fit: cover;
+  object-position: center 55%;
+  border-radius: 14px;
+  border: 1px solid var(--edge);
+  margin-bottom: 16px;
+}
+
 .session-photo {
   /* Height-bounded rather than cropped to a fixed ratio. These are group
      shots and a forced landscape crop takes the tops of heads off. */
@@ -1205,6 +1215,8 @@ function Teams() {
       <p className="page-sub">
         Every club in the field, with its Team Captain Host and players.
       </p>
+      <img className="section-band" src="assets/photos/teams-band.jpg" alt=""
+        loading="lazy" />
       <input className="search" placeholder="Find a club, captain, or player" value={q}
         onChange={(e) => setQ(e.target.value)} />
       {teams.length === 0 ? (
