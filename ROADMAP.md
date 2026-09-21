@@ -64,6 +64,18 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       that exists, so missing headshots cost nothing. Drop files in
       assets/sponsors/ named for the slug and rerun the script.
 
+## Phase 0d. Photo quality (Sep 21)
+
+- [x] **P0d.1 Cloud Storage.** Enabled on the project via the defaultBucket
+      API, rules deployed scoped to pinv/photos/, images only, 25MB cap,
+      bucket not publicly listable.
+- [x] **P0d.2 Two renditions.** Full at 3000px q0.92 for download and the
+      slideshow, thumb at 640px q0.8 for the grid. Verified end to end: a
+      4032x3024 source stored and downloaded back at exactly 3000x2250 JPEG,
+      and the grid requested only the thumbnail.
+- [x] **P0d.3 Orphan cleanup.** Admin delete removes both Storage objects
+      and the database node. Verified: both files return 404 afterwards.
+
 ## Phase 1. Content intake
 
 - [x] **P1.1 Event dates and agenda.** Done Sep 14 from the final agenda doc

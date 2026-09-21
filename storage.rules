@@ -1,0 +1,24 @@
+rules_version = '2';
+
+/* Partners Invitational event photos.
+ *
+ * Everything lives under pinv/. Anything outside that prefix is denied by
+ * default, which matters because this bucket belongs to the
+ * cgp-membership-wall-2026 project and is shared with that event.
+ *
+ * Reads are public because the wall has no sign-in. Writes are public for the
+ * same reason, which is the same trust model as the database, but capped so
+ * the bucket cannot be turned into free file hosting: images only, 25 MB
+ * ceiling. A delete carries a null resource, which is why the size and type
+ * checks are guarded.
+ */
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /pinv/photos/{file} {
+      allow read: if true;
+      allow write: if request.resource == null
+        || (request.resource.size < 25 * 1024 * 1024
+            && request.resource.contentType.matches('image/.*'));
+    }
+  }
+}

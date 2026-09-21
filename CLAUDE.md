@@ -114,6 +114,53 @@ separate rules. Nothing in this wall can read or write the membership wall's
 database. If the quota is ever freed, moving to a dedicated project is a one
 line change to `databaseURL` plus a rules deploy.
 
+**Photos live in Cloud Storage, not the database.** They get downloaded and
+projected in a slideshow, so quality is the point. Each upload writes two
+files under `pinv/photos/` in the bucket
+`cgp-membership-wall-2026.firebasestorage.app`:
+
+| Rendition | Long edge | Quality | Used for |
+|---|---|---|---|
+| `{id}-full.jpg` | 3000px | 0.92 | download, slideshow |
+| `{id}-thumb.jpg` | 640px | 0.8 | the grid |
+
+The database holds only the two URLs plus dimensions and bytes. That split is
+load-bearing: the Photos tab subscribes to the whole `photos` node, so if the
+image data lived there every phone would download every photo ever posted on
+every visit. With URLs it downloads thumbnails, roughly 8 to 40KB each, and
+fetches a full file only when someone taps one. Uploads carry a one year
+`Cache-Control`, so a second look costs nothing.
+
+Constants are `FULL_MAX`, `FULL_QUALITY`, `THUMB_MAX`, `THUMB_QUALITY` at the
+top of the gallery section. Raising FULL_MAX raises upload time on course
+wifi, which is the real constraint, not storage cost.
+
+Cropping is optional on the Photos tab and "Use the whole photo" is the
+primary button, because a square crop throws away exactly what a slideshow
+wants. The cropper never upscales: it caps output at the source pixels the
+frame actually covers.
+
+Deleting a photo removes both files as well as the database node. Skipping
+that leaves orphans in the bucket costing money forever.
+
+Sponsor photos are the exception and stay as base64 in the database. There
+are eleven, shown at 132px, so the load argument does not apply.
+
+**Storage setup, for the record.** Firebase Storage was not enabled on the
+project and the console "Get Started" click is the documented way to do it.
+It was enabled instead by POSTing to
+`firebasestorage.googleapis.com/v1beta/projects/{project}/defaultBucket` with
+the CLI's own OAuth token. Rules live in `storage.rules`: public read and
+write under `pinv/photos/` only, images only, 25MB ceiling, everything else
+denied by default. The bucket cannot be listed publicly. Deploy with
+
+```
+firebase deploy --only storage --project cgp-membership-wall-2026
+```
+
+The membership wall shares this bucket but does not use Storage at all, which
+is why scoping to the `pinv/` prefix matters.
+
 **Deploying rules.** `firebase.json` uses the ARRAY form of the database key.
 The object form silently ignores `instance` and deploys to the project's
 default database, which is the membership wall's. That happened once on
@@ -163,7 +210,8 @@ Anything fixed before the event lives in the repo as a static file.
 | Roster, agenda, concierge, resources, rounds config | Repo, static |
 | Headshots, logos | Repo, static |
 | Teams and per-round net scores | Firebase `teams/`, `scores/{teamId}/{r1,r2}` |
-| Live event photos, likes | Firebase `photos/`, compressed ~1000px |
+| Live event photos | Cloud Storage `pinv/photos/`, URLs in Firebase `photos/` |
+| Photo likes | Firebase `photoLikes/` |
 | Marquee, tab visibility, admin PIN | Firebase `settings/` |
 | Per device like history, admin session | Local storage, `pinv_` prefix |
 | Videos | YouTube or Vimeo unlisted embeds, never repo files |

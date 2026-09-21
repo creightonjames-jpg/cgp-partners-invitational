@@ -4,5 +4,8 @@
       "instance": "cgp-partners-inv-2026",
       "rules": "database.rules.json"
     }
-  ]
+  ],
+  "storage": {
+    "rules": "storage.rules"
+  }
 }
