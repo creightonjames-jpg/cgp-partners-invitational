@@ -68,7 +68,8 @@
         {
           "time": "6:00 pm",
           "title": "Teams dinner",
-          "detail": "La Quinta Cliffhouse. Smart or elegant casual."
+          "detail": "La Quinta Cliffhouse. Smart or elegant casual.",
+          "spouses": true
         }
       ]
     },
