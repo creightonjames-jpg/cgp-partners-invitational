@@ -123,8 +123,18 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       through the GitHub API. See "Publishing" in CLAUDE.md.
 - [ ] **P2.3 QR code.** Generate, place in assets/brand/, hand to organizers.
       Accept: QR resolves on an iPhone camera from a printed page.
-- [ ] **P2.4 PWA dressing.** manifest.webmanifest, icons, theme color. Accept:
-      Add to Home Screen shows the right name and icon.
+- [x] **P2.4 Add to Home Screen. Done Sep 21.** manifest.webmanifest with
+      standalone display and "./" start_url and scope (subpath, not domain
+      root), Apple meta tags, icons generated from the PGA WEST mark matted
+      on cream, maskable variant with a wide margin. Safe-area top inset
+      finally applied so the marquee clears the notch in standalone.
+      Verified live: manifest serves as application/manifest+json, all five
+      icons 200, and start_url and scope resolve to the project subpath.
+      Instructions live on the Program Guide.
+      NOT done: no service worker, so Chrome shows no automatic install
+      prompt. Adding from the menu still launches standalone. A service
+      worker would also buy offline, which is worth revisiting if the
+      clubhouse wifi is bad.
 
 ## Phase 3. Event hardening
 

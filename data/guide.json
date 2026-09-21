@@ -3,6 +3,24 @@
   "intro": "Everything you need for the week, in one place.",
   "sections": [
     {
+      "id": "homescreen",
+      "title": "Put It On Your Home Screen",
+      "items": [
+        {
+          "label": "Why bother",
+          "detail": "It opens full screen like an app, with no address bar, and you stop hunting for the link all week. Takes about ten seconds."
+        },
+        {
+          "label": "iPhone",
+          "detail": "Open this page in Safari. Tap the share button at the bottom, the square with the arrow pointing up. Scroll down and tap Add to Home Screen, then tap Add."
+        },
+        {
+          "label": "Android",
+          "detail": "Open this page in Chrome. Tap the three dots at the top right. Tap Add to Home screen, then tap Add or Install."
+        }
+      ]
+    },
+    {
       "id": "venue",
       "title": "The Club",
       "logo": "assets/brand/pgawest-logo.png",
