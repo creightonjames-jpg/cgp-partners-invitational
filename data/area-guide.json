@@ -6,21 +6,46 @@
       "id": "discounts",
       "title": "Your Partners Invitational Discounts",
       "items": [
-        { "label": "Show your Partners Invitational ID", "detail": "Present it when you pay at PGA WEST and La Quinta Resort & Club outlets." },
-        { "label": "20% off dining", "detail": "Excludes Peaks. The member discount is inclusive of price." },
-        { "label": "Golf shops", "detail": "20% off soft goods, 10% off hard goods." },
-        { "label": "20% off Spa La Quinta", "detail": "Spa and salon services." },
-        { "label": "20% off retail", "detail": "La Quinta Resort & Club Plaza retail shops and Marketplace retail, plus soft goods at the Tennis Pro Shop." }
+        {
+          "label": "20% off dining",
+          "detail": "Excludes Peaks. The member discount is inclusive of price."
+        },
+        {
+          "label": "Golf shops",
+          "detail": "20% off soft goods, 10% off hard goods."
+        },
+        {
+          "label": "20% off Spa La Quinta",
+          "detail": "Spa and salon services."
+        },
+        {
+          "label": "20% off retail",
+          "detail": "La Quinta Resort & Club Plaza retail shops and Marketplace retail, plus soft goods at the Tennis Pro Shop."
+        }
       ]
     },
     {
       "id": "clubhouses",
       "title": "The Other Clubhouses",
       "items": [
-        { "label": "Greg Norman Clubhouse", "detail": "81-405 Kingston Heath. Wallabys WEST serves lunch 11 am to 3 pm.", "phone": "760.564.3900" },
-        { "label": "Pete Dye Clubhouse", "detail": "50200 Avenida Vista Bonita. Golf shop daily 6 am to 5 pm. Bunker Bar serves lunch 11 am to 3 pm.", "phone": "760.564.7610" },
-        { "label": "Tournament Clubhouse", "detail": "Ernie's Bar & Grill. Grab and go breakfast from 6 am, full breakfast 7 am to 11 am, bar until 8 pm." },
-        { "label": "The Citrus Club", "detail": "Mandarina, La Quinta." }
+        {
+          "label": "Greg Norman Clubhouse",
+          "detail": "81-405 Kingston Heath. Wallabys WEST serves lunch 11 am to 3 pm.",
+          "phone": "760.564.3900"
+        },
+        {
+          "label": "Pete Dye Clubhouse",
+          "detail": "50200 Avenida Vista Bonita. Golf shop daily 6 am to 5 pm. Bunker Bar serves lunch 11 am to 3 pm.",
+          "phone": "760.564.7610"
+        },
+        {
+          "label": "Tournament Clubhouse",
+          "detail": "Ernie's Bar & Grill. Grab and go breakfast from 6 am, full breakfast 7 am to 11 am, bar until 8 pm."
+        },
+        {
+          "label": "The Citrus Club",
+          "detail": "Mandarina, La Quinta."
+        }
       ]
     },
     {
@@ -28,65 +53,153 @@
       "title": "At the Private Clubhouse",
       "placeholder": true,
       "items": [
-        { "label": "Private practice facility", "detail": "Open daily until dusk." },
-        { "label": "Fitness club", "detail": "Personal training by appointment." },
-        { "label": "Pickleball, tennis, and the swimming pool", "detail": "All on site." },
-        { "label": "Kennedy's", "detail": "Lunch, first come first served." },
-        { "label": "Hours and direct numbers", "detail": "Being confirmed with the club. Concierge at the main clubhouse number can help in the meantime.", "phone": "760.564.7111", "placeholder": true }
+        {
+          "label": "Private practice facility",
+          "detail": "Open daily until dusk."
+        },
+        {
+          "label": "Fitness club",
+          "detail": "Personal training by appointment."
+        },
+        {
+          "label": "Pickleball, tennis, and the swimming pool",
+          "detail": "All on site."
+        },
+        {
+          "label": "Kennedy's",
+          "detail": "Lunch, first come first served."
+        },
+        {
+          "label": "Hours and direct numbers",
+          "detail": "Being confirmed with the club. Concierge at the main clubhouse number can help in the meantime.",
+          "phone": "760.564.7111",
+          "placeholder": true
+        }
       ]
     },
     {
       "id": "dining",
       "title": "Dining at the Resort",
       "items": [
-        { "label": "Morgans in the Desert", "detail": "Dinner Wednesday through Sunday, 5:30 pm to 9 pm." },
-        { "label": "Twenty6", "detail": "Breakfast 7 am to 11 am." },
-        { "label": "Reservations", "detail": "La Quinta Resort & Club, 49-499 Eisenhower Drive. Also bookable on OpenTable.", "phone": "760.564.4111", "url": "https://www.laquintaresort.com" }
+        {
+          "label": "Morgans in the Desert",
+          "detail": "Dinner Wednesday through Sunday, 5:30 pm to 9 pm."
+        },
+        {
+          "label": "Twenty6",
+          "detail": "Breakfast 7 am to 11 am."
+        },
+        {
+          "label": "Reservations",
+          "detail": "La Quinta Resort & Club, 49-499 Eisenhower Drive. Also bookable on OpenTable.",
+          "phone": "760.564.4111",
+          "url": "https://www.laquintaresort.com"
+        }
       ]
     },
     {
       "id": "spa",
       "title": "Spas",
       "items": [
-        { "label": "Spa La Quinta", "detail": "At the resort, 49-499 Eisenhower Drive. Tuesday to Sunday, 9 am to 6 pm. Your Partners Invitational ID gets 20% off.", "phone": "760.777.4800" },
-        { "label": "Agua Serena Spa", "detail": "Hyatt Regency Indian Wells, 44-600 Indian Wells Lane. Wednesday to Sunday, 9:30 am to 5 pm. Closed Monday and Tuesday.", "phone": "760.674.4100" },
-        { "label": "The Ritz-Carlton Spa, Rancho Mirage", "detail": "68-900 Frank Sinatra Drive. Thursday to Monday, 8:30 am to 6 pm.", "phone": "760.202.6170" }
+        {
+          "label": "Spa La Quinta",
+          "detail": "At the resort, 49-499 Eisenhower Drive. Tuesday to Sunday, 9 am to 6 pm.",
+          "phone": "760.777.4800"
+        },
+        {
+          "label": "Agua Serena Spa",
+          "detail": "Hyatt Regency Indian Wells, 44-600 Indian Wells Lane. Wednesday to Sunday, 9:30 am to 5 pm. Closed Monday and Tuesday.",
+          "phone": "760.674.4100"
+        },
+        {
+          "label": "The Ritz-Carlton Spa, Rancho Mirage",
+          "detail": "68-900 Frank Sinatra Drive. Thursday to Monday, 8:30 am to 6 pm.",
+          "phone": "760.202.6170"
+        }
       ]
     },
     {
       "id": "shopping",
       "title": "Shopping",
       "items": [
-        { "label": "Old Town La Quinta", "detail": "78100 Main Street. The closest option, and walkable once you are there.", "url": "https://www.oldtownlaquinta.com" },
-        { "label": "The Gardens on El Paseo", "detail": "73-545 El Paseo, Palm Desert. About 12 miles, 25 minutes.", "url": "https://www.thegardensonelpaseo.com" },
-        { "label": "Cabazon Outlets", "detail": "48750 Seminole Drive, Cabazon. About 43 miles, 48 minutes.", "url": "https://www.cabazonoutlets.com" }
+        {
+          "label": "Old Town La Quinta",
+          "detail": "78100 Main Street. The closest option, and walkable once you are there.",
+          "url": "https://www.oldtownlaquinta.com"
+        },
+        {
+          "label": "The Gardens on El Paseo",
+          "detail": "73-545 El Paseo, Palm Desert. About 12 miles, 25 minutes.",
+          "url": "https://www.thegardensonelpaseo.com"
+        },
+        {
+          "label": "Cabazon Outlets",
+          "detail": "48750 Seminole Drive, Cabazon. About 43 miles, 48 minutes.",
+          "url": "https://www.cabazonoutlets.com"
+        }
       ]
     },
     {
       "id": "hiking",
       "title": "Morning Hikes",
       "items": [
-        { "label": "La Quinta Cove to Lake Cahuilla", "detail": "The local favorite, and the closest to the resort.", "url": "https://www.alltrails.com/trail/us/california/cove-to-lake-trail" },
-        { "label": "The Bump and Grind", "detail": "A steady climb with valley views the whole way up.", "url": "https://www.alltrails.com/trail/us/california/bump-and-grind-trail" },
-        { "label": "Tahquitz Canyon Loop", "detail": "Palm Springs, with a waterfall at the turn.", "url": "https://www.alltrails.com/trail/us/california/tahquitz-canyon-loop-trail" }
+        {
+          "label": "La Quinta Cove to Lake Cahuilla",
+          "detail": "The local favorite, and the closest to the resort.",
+          "url": "https://www.alltrails.com/trail/us/california/cove-to-lake-trail"
+        },
+        {
+          "label": "The Bump and Grind",
+          "detail": "A steady climb with valley views the whole way up.",
+          "url": "https://www.alltrails.com/trail/us/california/bump-and-grind-trail"
+        },
+        {
+          "label": "Tahquitz Canyon Loop",
+          "detail": "Palm Springs, with a waterfall at the turn.",
+          "url": "https://www.alltrails.com/trail/us/california/tahquitz-canyon-loop-trail"
+        }
       ]
     },
     {
       "id": "coachella",
       "title": "Coachella Valley Must Sees",
       "items": [
-        { "label": "Palm Springs Air Museum", "detail": "One of the world's largest collections of flyable WWII aircraft, plus Korea and Vietnam era planes. Air conditioned hangars, no ropes, and volunteers who will talk you through every aircraft.", "url": "https://www.palmspringsairmuseum.org" },
-        { "label": "Fantasy Balloon Flights", "detail": "Champagne balloon rides over the valley, daily September through May. $250 adults, $230 seniors, $175 children 12 and under.", "url": "https://www.fantasyballoonflight.com" },
-        { "label": "Palm Springs Celebrity Tours", "detail": "The hideaway homes of Sinatra, Dean Martin, Sammy Davis Jr., Bob Hope, and more. Private tours from $350 for one to three guests.", "url": "https://www.palmspringscelebritytours.com" },
-        { "label": "Red Jeep Tours", "detail": "Desert Adventures has run the valley's eco and adventure tours since 1988. Geology, history, canyons, and the big vistas.", "url": "https://www.red-jeep.com" }
+        {
+          "label": "Palm Springs Air Museum",
+          "detail": "One of the world's largest collections of flyable WWII aircraft, plus Korea and Vietnam era planes. Air conditioned hangars, no ropes, and volunteers who will talk you through every aircraft.",
+          "url": "https://www.palmspringsairmuseum.org"
+        },
+        {
+          "label": "Fantasy Balloon Flights",
+          "detail": "Champagne balloon rides over the valley, daily September through May. $250 adults, $230 seniors, $175 children 12 and under.",
+          "url": "https://www.fantasyballoonflight.com"
+        },
+        {
+          "label": "Palm Springs Celebrity Tours",
+          "detail": "The hideaway homes of Sinatra, Dean Martin, Sammy Davis Jr., Bob Hope, and more. Private tours from $350 for one to three guests.",
+          "url": "https://www.palmspringscelebritytours.com"
+        },
+        {
+          "label": "Red Jeep Tours",
+          "detail": "Desert Adventures has run the valley's eco and adventure tours since 1988. Geology, history, canyons, and the big vistas.",
+          "url": "https://www.red-jeep.com"
+        }
       ]
     },
     {
       "id": "highdesert",
       "title": "High Desert Day Trips",
       "items": [
-        { "label": "Joshua Tree National Park", "detail": "Open year round, and October begins the busy season. Roughly 800,000 acres with very few facilities, which is the point. Hiking, climbing, photography, and quiet.", "url": "https://www.nps.gov/jotr/index.htm" },
-        { "label": "Pioneertown", "detail": "A former film set turned desert town. Pappy and Harriet's Pioneertown Palace is open Thursday to Monday, 5 pm to 11 pm. Nearby: the Pioneertown Mountain Preserve and La Copine Kitchen for brunch.", "url": "https://www.visitpioneertown.com" }
+        {
+          "label": "Joshua Tree National Park",
+          "detail": "Open year round, and October begins the busy season. Roughly 800,000 acres with very few facilities, which is the point. Hiking, climbing, photography, and quiet.",
+          "url": "https://www.nps.gov/jotr/index.htm"
+        },
+        {
+          "label": "Pioneertown",
+          "detail": "A former film set turned desert town. Pappy and Harriet's Pioneertown Palace is open Thursday to Monday, 5 pm to 11 pm. Nearby: the Pioneertown Mountain Preserve and La Copine Kitchen for brunch.",
+          "url": "https://www.visitpioneertown.com"
+        }
       ]
     }
   ]
