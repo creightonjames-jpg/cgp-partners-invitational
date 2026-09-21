@@ -119,6 +119,20 @@ separate rules. Nothing in this wall can read or write the membership wall's
 database. If the quota is ever freed, moving to a dedicated project is a one
 line change to `databaseURL` plus a rules deploy.
 
+**Editorial photos are PROVISIONAL.** `assets/photos/` holds the masthead
+band and four agenda photos, all cropped out of the single collage image in
+the 2026 brochure as a look test. They are low resolution because of it: the
+band is 1268px wide, which is under retina at desktop. Jim is sourcing the
+originals. When they arrive, replace the files at the same paths and nothing
+else needs touching. `tools/` has no script for this; the crops were made
+with sharp, and the collage boundaries were found by scanning for brightness
+jumps rather than by eye (the panel divider is at x=1268, the right column
+splits at y=374 and y=757, and the middle band splits at x=1634).
+
+The masthead photograph is **John Henebry's** and the credit renders over the
+bottom right of the band. Do not remove it, and confirm the licence before
+this goes anywhere beyond the event wall.
+
 **Photos live in Cloud Storage, not the database.** They get downloaded and
 projected in a slideshow, so quality is the point. Each upload writes two
 files under `pinv/photos/` in the bucket

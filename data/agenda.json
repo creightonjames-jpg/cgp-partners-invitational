@@ -1,5 +1,5 @@
 {
-  "_note": "Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. spouses:true marks starred events where spouses and significant others are invited.",
+  "_note": "Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
   "eventName": "The Partners Invitational",
   "edition": "18th Annual",
   "venue": "PGA WEST, La Quinta, California",
@@ -32,7 +32,8 @@
           "time": "6:45 pm",
           "title": "Light the Night in White Opening Party",
           "detail": "6:45 to 9:00 pm. Ballroom. Wear white, no denim.",
-          "spouses": true
+          "spouses": true,
+          "photo": "assets/photos/last-white.jpg"
         }
       ]
     },
@@ -50,7 +51,8 @@
         {
           "time": "8:30 am",
           "title": "Round 1 shotgun",
-          "detail": "Nicklaus Private Golf Course. Two-person scramble."
+          "detail": "Nicklaus Private Golf Course. Two-person scramble.",
+          "photo": "assets/photos/last-flag.jpg"
         },
         {
           "time": "11:30 am",
@@ -63,7 +65,8 @@
         {
           "time": "1:30 pm",
           "title": "Member Shootout",
-          "spouses": true
+          "spouses": true,
+          "photo": "assets/photos/last-trio.jpg"
         },
         {
           "time": "6:00 pm",
@@ -109,7 +112,8 @@
           "time": "6:30 pm",
           "title": "Dinner and Awards Celebration",
           "detail": "Ballroom.",
-          "spouses": true
+          "spouses": true,
+          "photo": "assets/photos/last-dinner.jpg"
         }
       ]
     },

@@ -200,8 +200,32 @@ a { color: var(--pool-deep); }
   opacity: 0.85;
 }
 
-/* Mountain horizon. The Santa Rosas at dusk, in three quiet ridges. */
+/* Mountain horizon, drawn. Superseded by the photo band below, kept as the
+   fallback if the photograph is ever pulled. */
 .horizon { display: block; width: 100%; height: 54px; margin-top: 6px; }
+
+/* The real Santa Rosas behind the course. Credited, because the photograph
+   is John Henebry's. */
+.masthead-photo { position: relative; margin-top: 10px; line-height: 0; }
+.masthead-photo img {
+  width: 100%;
+  height: clamp(120px, 22vw, 210px);
+  object-fit: cover;
+  object-position: center 62%;
+  border-top: 3px solid var(--pool-deep);
+  border-bottom: 3px solid var(--pool-deep);
+}
+.photo-credit {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
 
 /* --------------------------------------------------------------- marquee */
 .marquee {
@@ -320,6 +344,18 @@ a { color: var(--pool-deep); }
 }
 .session-title { font-weight: 600; }
 .session-detail { color: var(--dim); font-size: 14px; margin-top: 2px; }
+/* Last year, showing what the evening actually looks like. Beats describing
+   a dress code in a sentence. */
+.session-photo {
+  /* Height-bounded rather than cropped to a fixed ratio. These are group
+     shots and a forced landscape crop takes the tops of heads off. */
+  max-height: 210px;
+  max-width: 100%;
+  width: auto;
+  border-radius: 10px;
+  border: 1px solid var(--edge);
+  margin-top: 8px;
+}
 
 /* ---------------------------------------------------------------- roster */
 .person { display: flex; gap: 12px; align-items: center; }
@@ -1018,7 +1054,10 @@ function Masthead({ agenda }) {
           {agenda && <span> &middot; {agenda.dates}</span>}
         </div>
       </div>
-      <Horizon />
+      <div className="masthead-photo">
+        <img src="assets/photos/hero-band.jpg" alt="" loading="eager" />
+        <span className="photo-credit">Photo by John Henebry</span>
+      </div>
     </header>
   );
 }
@@ -1062,6 +1101,9 @@ function Agenda() {
                   {s.placeholder && <span> <PhChip /></span>}
                 </div>
                 {s.detail && <div className="session-detail">{s.detail}</div>}
+                {s.photo && (
+                  <img className="session-photo" src={s.photo} alt="" loading="lazy" />
+                )}
               </div>
             </div>
           ))}
