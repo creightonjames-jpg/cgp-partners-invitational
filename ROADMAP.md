@@ -136,6 +136,33 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       worker would also buy offline, which is worth revisiting if the
       clubhouse wifi is bad.
 
+## Phase 2b. Move off the personal account (Sep 22)
+
+Yolanda asked that the link stop reading "Creighton James". That string is the
+GitHub account name inside the domain, so renaming the repo alone does not fix
+it. Target: https://centurygolf.github.io/2026-partners-invitational
+
+- [!] **P2b.1 Create the org.** BLOCKED ON JIM, and only on him: GitHub's REST
+      API has no org-creation endpoint, it is a browser action. Free plan,
+      name `centurygolf`, still available as of Sep 22.
+- [ ] **P2b.2 Transfer and rename.** Move the repo to the org and rename to
+      `2026-partners-invitational`. May need the gh token re-authed with
+      `admin:org`; if so, doing the transfer in the browser is quicker.
+- [ ] **P2b.3 Re-point the tooling.** OWNER and REPO at the top of
+      tools/publish.js, plus every URL in CLAUDE.md, ROADMAP.md and the
+      session memory.
+- [ ] **P2b.4 Confirm Pages survived.** Transfers keep the Pages setting but
+      the site needs a rebuild. Check the new URL serves, then check the old
+      one redirects rather than 404s.
+- [ ] **P2b.5 Origin change checks.** `centurygolf.github.io` is a DIFFERENT
+      ORIGIN from `creightonjames-jpg.github.io`. Two consequences worth
+      testing rather than assuming: a photo upload still works (the Storage
+      bucket's CORS has to allow the new origin), and anyone who already
+      opened the wall loses their `pinv_` local storage, so their liked
+      photos and admin session reset. Nobody is relying on either yet.
+- [ ] **P2b.6 QR code.** Generate against the FINAL url, not before. This is
+      why P2.3 stayed open.
+
 ## Phase 3. Event hardening
 
 - [ ] **P3.1 Display Mode for the leaderboard.** Big-screen standings view,
